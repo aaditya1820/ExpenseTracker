@@ -1,0 +1,3 @@
+MONGO_URI = mongodb+srv://expenseTracker:JncSYnPIB2qwf9J4@expensetracker.9rnxoei.mongodb.net/?retryWrites=true&w=majority&appName=expenseTracker
+ JWT_SECRET = 1b878f6b9b7e817d12aaf339ddd8466ef2eb16755740cfbb13a3e709bc06fe5ee96811a59a2ef1a171e65cc1458c966a78b9710697b897024182d604ad652439
+PORT = 8000
