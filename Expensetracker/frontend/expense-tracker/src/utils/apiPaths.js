@@ -1,4 +1,4 @@
-export const BASE_URL = "https://finmate-gpoc.onrender.com";
+export const BASE_URL = "https://expensetracker-5-dkox.onrender.com/";
 
 // utils/apiPaths.js
 export const API_PATHS = {
@@ -26,3 +26,4 @@ export const API_PATHS = {
     UPLOAD_IMAGE: "/api/v1/auth/upload-image",
   },
 };
+
