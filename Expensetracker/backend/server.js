@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*",
+    origin: 'https://expensetracker-0301.onrender.com',
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -31,3 +31,4 @@ app.use("/uploads" , express.static(path.join(__dirname , "uploads")))
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on ${PORT}`));
+
