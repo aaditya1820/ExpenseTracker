@@ -16,7 +16,7 @@ const CustomLineChart = ({ data = [] }) => {
       return (
         <div className="bg-white p-3 shadow-xl rounded-2xl border border-blue-50">
           <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">
-            {item.month || item.category || "Detail"}
+            {item.date || item.month || item.category || "Detail"}
           </p>
           <p className="text-blue-900 font-bold text-lg">
             ₹{payload[0].value.toLocaleString()}
@@ -46,7 +46,7 @@ const CustomLineChart = ({ data = [] }) => {
             vertical={false}
           />
           <XAxis
-            dataKey="month"
+            dataKey="date"
             axisLine={false}
             tickLine={false}
             tick={{ fill: "#64748b", fontSize: 12, fontWeight: 500 }}
