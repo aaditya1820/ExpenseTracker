@@ -65,8 +65,8 @@
   }
 
   input::placeholder, textarea::placeholder {
-    color: var(--color-blue-900);
-    opacity: 0.4;
+    color: #023e8a;
+    opacity: 0.6;
   }
 
   .card {
