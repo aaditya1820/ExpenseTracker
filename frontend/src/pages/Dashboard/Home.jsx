@@ -42,12 +42,12 @@ const Home = () => {
     <DashboardLayout activeMenu="Dashboard">
       <div className="space-y-8">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-[#0077b6]">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-gray-100">
           <div>
-            <h1 className="text-3xl font-bold text-[#caf0f8] tracking-tight">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
               Hello, {user?.fullName?.split(' ')[0] || 'User'}
             </h1>
-            <p className="text-[#90e0ef] mt-1 font-medium">
+            <p className="text-slate-500 mt-1 font-medium">
               Your CashSprout overview is ready.
             </p>
           </div>
@@ -55,14 +55,14 @@ const Home = () => {
           <div className="flex items-center gap-3">
             <button 
               onClick={() => navigate("/income")}
-              className="add-btn bg-[#0077b6] text-[#caf0f8] border-[#0096c7] hover:bg-[#0096c7]"
+              className="add-btn bg-white text-blue-600 border-gray-200 hover:bg-gray-50"
             >
               <LuPlus /> 
               <span>Add Income</span>
             </button>
             <button 
               onClick={() => navigate("/expense")}
-              className="add-btn bg-[#90e0ef] text-[#03045e] border-transparent hover:bg-[#ade8f4]"
+              className="add-btn bg-blue-600 text-white border-transparent hover:bg-blue-700"
             >
               <LuPlus /> 
               <span>Add Expense</span>
@@ -76,19 +76,19 @@ const Home = () => {
             icon={<IoMdCard />}
             label="Total Balance"
             value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
-            color="bg-[#023e8a] border-[#0077b6]"
+            color="bg-white border-gray-100"
           />
           <InfoCard
             icon={<LuArrowUpRight />}
             label="Total Income"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
-            color="bg-[#023e8a] border-[#0077b6]"
+            color="bg-white border-gray-100"
           />
           <InfoCard
             icon={<LuArrowDownRight />}
             label="Total Expense"
             value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
-            color="bg-[#023e8a] border-[#0077b6]"
+            color="bg-white border-gray-100"
           />
         </div>
 
@@ -132,6 +132,7 @@ const Home = () => {
     </DashboardLayout>
   );
 };
+
 
 
 export default Home;

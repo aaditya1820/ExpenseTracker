@@ -56,13 +56,13 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="mb-10">
-        <h2 className="text-3xl font-bold text-[#caf0f8] tracking-tight">Sign In</h2>
-        <p className="text-[#90e0ef] font-medium mt-1">Welcome back to CashSprout.</p>
+        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Sign In</h2>
+        <p className="text-slate-500 font-medium mt-1">Welcome back to CashSprout.</p>
       </div>
 
       <form onSubmit={handleLogin} className="space-y-6">
         <div>
-          <label className="text-xs font-bold text-[#00b4d8] uppercase tracking-widest ml-1">
+          <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">
             Email Address
           </label>
           <input
@@ -70,26 +70,26 @@ const Login = () => {
             onChange={({ target }) => setEmail(target.value)}
             placeholder="name@email.com"
             type="email"
-            className="input-box border-[#0077b6] focus:border-[#48cae4] placeholder:text-[#0077b6]"
+            className="input-box border-gray-200 focus:border-blue-600 placeholder:text-gray-300"
             required
           />
         </div>
 
         <div>
-          <label className="text-xs font-bold text-[#00b4d8] uppercase tracking-widest ml-1">Password</label>
+          <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Password</label>
           <div className="relative">
             <input
               value={password}
               onChange={({ target }) => setPassword(target.value)}
               placeholder="••••••••"
               type={showPassword ? "text" : "password"}
-              className="input-box pr-12 border-[#0077b6] focus:border-[#48cae4] placeholder:text-[#0077b6]"
+              className="input-box pr-12 border-gray-200 focus:border-blue-600 placeholder:text-gray-300"
               required
             />
             <button
               type="button"
               onClick={togglePassword}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#0077b6] hover:text-[#48cae4] transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors"
             >
               {showPassword ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
             </button>
@@ -97,21 +97,21 @@ const Login = () => {
         </div>
 
         {error && (
-          <p className="text-[#f43f5e] text-xs font-bold bg-[#f43f5e]/5 p-4 rounded-xl border border-[#f43f5e]/10">
+          <p className="text-rose-500 text-xs font-bold bg-rose-50 p-4 rounded-xl border border-rose-100">
             {error}
           </p>
         )}
 
         <button
           type="submit"
-          className="w-full bg-[#00b4d8] text-[#03045e] py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#48cae4] transition-all active:scale-[0.98]"
+          className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-[0.98]"
         >
           Sign In
         </button>
 
-        <p className="text-center text-[#90e0ef] text-sm font-medium">
+        <p className="text-center text-slate-500 text-sm font-medium">
           New here?{" "}
-          <Link className="text-[#caf0f8] hover:text-[#00b4d8] font-bold underline underline-offset-4" to="/signup">
+          <Link className="text-slate-900 hover:text-blue-600 font-bold underline underline-offset-4" to="/signup">
             Create account
           </Link>
         </p>
@@ -119,6 +119,7 @@ const Login = () => {
     </AuthLayout>
   );
 };
+
 
 
 export default Login;
