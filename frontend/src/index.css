@@ -61,7 +61,7 @@
   }
 
   .input-box {
-    @apply w-full text-sm text-slate-900 bg-white rounded-xl px-4 py-3.5 mb-4 mt-2 border border-blue-100 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100;
+    @apply w-full text-sm text-[#023e8a] bg-white rounded-xl px-4 py-3.5 mb-4 mt-2 border border-blue-100 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100;
   }
 
   input::placeholder, textarea::placeholder {
