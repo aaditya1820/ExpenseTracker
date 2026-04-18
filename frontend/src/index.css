@@ -64,6 +64,11 @@
     @apply w-full text-sm text-slate-900 bg-white rounded-xl px-4 py-3.5 mb-4 mt-2 border border-blue-100 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100;
   }
 
+  input::placeholder, textarea::placeholder {
+    color: var(--color-blue-900);
+    opacity: 0.4;
+  }
+
   .card {
     @apply bg-white p-6 md:p-8 rounded-3xl border border-blue-50 shadow-sm transition-all duration-300;
   }

@@ -7,9 +7,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import toast from "react-hot-toast";
 
-const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operationMessage }) => {
+const ExpenseOverview = ({ transactions, onAddExpense, showLimitForm, setShowLimitForm }) => {
   const [chartData, setChartData] = useState([]);
-  const [showExpenseLimitModal, setShowExpenseLimitModal] = useState(false);
   const [expenseLimitData, setExpenseLimitData] = useState(null);
 
   const fetchExpenseLimit = async () => {
@@ -51,7 +50,7 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
       });
       setExpenseLimitData(response.data.goal);
       toast.success("Expense limit updated successfully!");
-      setShowExpenseLimitModal(false);
+      setShowLimitForm(false);
     } catch (error) {
       console.error("Error setting expense limit:", error);
       toast.error("Failed to set expense limit");
@@ -72,12 +71,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
         </div>
         <div className="flex gap-2">
           <button
-            onClick={() => setShowExpenseLimitModal((prev) => !prev)}
-            className="secondary-btn !py-2 !px-4 text-xs"
-          >
-            {showExpenseLimitModal ? "Close Limit" : (expenseLimitData ? "Update Limit" : "Set Limit")}
-          </button>
-          <button
             onClick={onAddExpense}
             className="add-btn !py-2 !px-4 text-xs"
           >
@@ -88,11 +81,11 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
       </div>
 
       <div className="p-6 md:p-8">
-        {showExpenseLimitModal && (
+        {showLimitForm && (
           <div className="mb-8 p-6 border border-blue-100 rounded-2xl bg-blue-50/50 animate-in fade-in slide-in-from-top-4 duration-300">
              <h3 className="text-sm font-bold text-blue-900 mb-4 uppercase tracking-widest">Set Your Spending Limit</h3>
              <ExpenseLimitModal
-               onClose={() => setShowExpenseLimitModal(false)}
+               onClose={() => setShowLimitForm(false)}
                onExpenseLimit={handleSetExpenseLimit}
                initialData={expenseLimitData}
              />

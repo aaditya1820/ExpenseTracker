@@ -7,9 +7,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import toast from "react-hot-toast";
 
-const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
+const IncomeOverview = ({ transactions, onAddIncome, showGoalForm, setShowGoalForm }) => {
   const [chartData, setChartData] = useState([]);
-  const [showGoalForm, setShowGoalForm] = useState(false);
   const [incomeGoalData, setIncomeGoalData] = useState(null);
 
   const fetchIncomeGoal = async () => {
@@ -74,12 +73,6 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
           </p>
         </div>
         <div className="flex gap-2">
-          <button
-            onClick={() => setShowGoalForm((prev) => !prev)}
-            className="secondary-btn !py-2 !px-4 text-xs"
-          >
-            {showGoalForm ? "Close Goal" : (incomeGoalData ? "Update Goal" : "Set Goal")}
-          </button>
           <button
             onClick={onAddIncome}
             className="add-btn !py-2 !px-4 text-xs"

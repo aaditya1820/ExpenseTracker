@@ -11,13 +11,14 @@ import "jspdf-autotable";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import toast from "react-hot-toast";
-import { LuPlus, LuDownload, LuReceipt } from "react-icons/lu";
+import { LuPlus, LuDownload, LuReceipt, LuTarget } from "react-icons/lu";
 
 const Expense = () => {
   useUserAuth();
   const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
+  const [showLimitForm, setShowLimitForm] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -113,7 +114,6 @@ const Expense = () => {
   return (
     <DashboardLayout activeMenu="Expense">
       <div className="space-y-10 pb-10">
-        {}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-blue-50">
           <div className="flex flex-col items-center md:items-start">
             <h1 className="text-4xl font-bold text-blue-900 tracking-tight flex items-center gap-3">
@@ -128,17 +128,17 @@ const Expense = () => {
           <div className="flex items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             <button 
               onClick={handleDownloadExpenseDetails}
-              className="secondary-btn"
+              className="secondary-btn !py-3 !px-6"
             >
               <LuDownload /> 
               <span>Export</span>
             </button>
             <button 
-              onClick={() => setOpenAddExpenseModal(true)}
-              className="add-btn shadow-blue-500/20"
+              onClick={() => setShowLimitForm(!showLimitForm)}
+              className="add-btn !py-3 !px-6 shadow-blue-500/20"
             >
-              <LuPlus /> 
-              <span>New Entry</span>
+              <LuTarget /> 
+              <span>{showLimitForm ? "Close Limit" : "Set Limit"}</span>
             </button>
           </div>
         </div>
@@ -147,6 +147,8 @@ const Expense = () => {
           <ExpenseOverview
             transactions={expenseData}
             onAddExpense={() => setOpenAddExpenseModal(true)}
+            showLimitForm={showLimitForm}
+            setShowLimitForm={setShowLimitForm}
           />
           <ExpenseList
             transactions={expenseData}

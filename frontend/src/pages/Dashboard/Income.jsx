@@ -110,10 +110,11 @@ const Income = () => {
     fetchIncomeDetails();
   }, []);
 
+  const [showGoalForm, setShowGoalForm] = useState(false);
+
   return (
     <DashboardLayout activeMenu="Income">
       <div className="space-y-10 pb-10">
-        {}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-blue-50">
           <div className="flex flex-col items-center md:items-start">
             <h1 className="text-4xl font-bold text-blue-900 tracking-tight flex items-center gap-3">
@@ -128,17 +129,17 @@ const Income = () => {
           <div className="flex items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             <button 
               onClick={handleDownloadIncomeDetails}
-              className="secondary-btn"
+              className="secondary-btn !py-3 !px-6"
             >
               <LuDownload /> 
               <span>Export</span>
             </button>
             <button 
-              onClick={() => setOpenAddIncomeModal(true)}
-              className="add-btn shadow-blue-500/20"
+              onClick={() => setShowGoalForm(!showGoalForm)}
+              className="add-btn !py-3 !px-6 shadow-blue-500/20"
             >
-              <LuPlus /> 
-              <span>New Entry</span>
+              <LuTarget /> 
+              <span>{showGoalForm ? "Close Goal" : "Set Goal"}</span>
             </button>
           </div>
         </div>
@@ -147,6 +148,8 @@ const Income = () => {
           <IncomeOverview
             transactions={incomeData}
             onAddIncome={() => setOpenAddIncomeModal(true)}
+            showGoalForm={showGoalForm}
+            setShowGoalForm={setShowGoalForm}
           />
           <IncomeList
             transactions={incomeData}
