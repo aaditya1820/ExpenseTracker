@@ -1,7 +1,6 @@
 import { LuDownload } from "react-icons/lu";
 import TransactionInfoCard from "../Cards/TransactionInfoCard";
 import moment from "moment";
-
 const ExpenseList = ({ transactions, onDelete, onDownload }) => {
   return (
     <div className="card">
@@ -11,7 +10,6 @@ const ExpenseList = ({ transactions, onDelete, onDownload }) => {
           <LuDownload className="text-base" /> Download
         </button>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2">
         {transactions?.map((expense) => (
           <TransactionInfoCard
@@ -28,5 +26,4 @@ const ExpenseList = ({ transactions, onDelete, onDownload }) => {
     </div>
   );
 };
-
-export default ExpenseList;
+export default ExpenseList;

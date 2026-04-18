@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-
 function AddExpenseLimit({ onExpenseLimit }) {
   const [expenseLimit, setexpenseLimit] = useState({
     expenseLimit: "",
     month: "",
     year: "",
   });
-
   const handleChange = (key, value) => {
     setexpenseLimit((prev) => ({ ...prev, [key]: value }));
   };
-
   return (
     <div className="flex flex-col gap-5 text-gray-700 w-[75vw] sm:w-full">
       <div className="flex flex-col">
@@ -24,7 +21,6 @@ function AddExpenseLimit({ onExpenseLimit }) {
           className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-200 bg-white"
         />
       </div>
-
       <div className="flex flex-col">
         <label className="text-sm mb-1 font-medium">Month</label>
         <input
@@ -36,7 +32,6 @@ function AddExpenseLimit({ onExpenseLimit }) {
           className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-200 bg-white"
         />
       </div>
-
       <div className="flex flex-col">
         <label className="text-sm mb-1 font-medium">Year</label>
         <input
@@ -47,7 +42,6 @@ function AddExpenseLimit({ onExpenseLimit }) {
           className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-200 bg-white"
         />
       </div>
-
       <div className="flex justify-end mt-6">
         <button
           type="button"
@@ -60,5 +54,4 @@ function AddExpenseLimit({ onExpenseLimit }) {
     </div>
   );
 }
-
-export default AddExpenseLimit;
+export default AddExpenseLimit;

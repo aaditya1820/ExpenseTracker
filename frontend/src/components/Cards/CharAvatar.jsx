@@ -1,6 +1,5 @@
 import React from "react";
 import { getInitials } from "../../utils/helper";
-
 const CharAvatar = ({ fullname, width, height, style }) => {
   return (
     <div
@@ -12,5 +11,4 @@ const CharAvatar = ({ fullname, width, height, style }) => {
     </div>
   );
 };
-
-export default CharAvatar;
+export default CharAvatar;

@@ -1,8 +1,6 @@
 export const BASE_URL = import.meta.env.MODE === "development" 
   ? "http://localhost:5000" 
   : "";
-
-// utils/apiPaths.js
 export const API_PATHS = {
   AUTH: {
     LOGIN: "/api/v1/auth/login",
@@ -27,4 +25,4 @@ export const API_PATHS = {
   IMAGE: {
     UPLOAD_IMAGE: "/api/v1/auth/upload-image",
   },
-};
+};

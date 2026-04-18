@@ -9,7 +9,6 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-
 const distinctColors = [
   "#A084E8",
   "#9376E0",
@@ -32,7 +31,6 @@ const distinctColors = [
   "#6680B3",
   "#66991A",
 ];
-
 const IncomeBarChart = ({ data = [] }) => {
   const processedData = data.map((item, index) => ({
     ...item,
@@ -40,7 +38,6 @@ const IncomeBarChart = ({ data = [] }) => {
     amount: Number(item.amount) || 0,
     color: distinctColors[index % distinctColors.length],
   }));
-
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const item = payload[0].payload;
@@ -55,7 +52,6 @@ const IncomeBarChart = ({ data = [] }) => {
     }
     return null;
   };
-
   if (!processedData.length) {
     return (
       <div className="bg-white w-full h-[300px] flex flex-col items-center justify-center rounded-lg p-4">
@@ -66,7 +62,6 @@ const IncomeBarChart = ({ data = [] }) => {
       </div>
     );
   }
-
   return (
     <div className="bg-white w-full h-[400px] p-4 rounded-lg shadow-sm">
       <ResponsiveContainer width="100%" height="100%">
@@ -103,5 +98,4 @@ const IncomeBarChart = ({ data = [] }) => {
     </div>
   );
 };
-
-export default IncomeBarChart;
+export default IncomeBarChart;

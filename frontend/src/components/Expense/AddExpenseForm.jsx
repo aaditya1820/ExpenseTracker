@@ -7,11 +7,9 @@ const AddExpenseForm = ({ onAddExpense }) => {
     date: "",
     icon: "",
   });
-
   const handleChange = (key, value) => {
     setExpense({ ...expense, [key]: value });
   };
-
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl space-y-5 max-w-md w-full mx-auto border border-gray-200">
       <EmojiPickerPopup
@@ -21,8 +19,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
       <h2 className="text-2xl font-semibold text-center text-purple-600">
         Add Expense
       </h2>
-
-      {/* Expense Category */}
+      {}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">
           Expense Category
@@ -35,8 +32,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm transition-all"
         />
       </div>
-
-      {/* Amount */}
+      {}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">
           Amount
@@ -49,8 +45,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm transition-all"
         />
       </div>
-
-      {/* Date */}
+      {}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">
           Date
@@ -62,8 +57,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm transition-all"
         />
       </div>
-
-      {/* Submit Button */}
+      {}
       <div className="flex justify-center pt-2">
         <button
           type="button"
@@ -76,5 +70,4 @@ const AddExpenseForm = ({ onAddExpense }) => {
     </div>
   );
 };
-
-export default AddExpenseForm;
+export default AddExpenseForm;

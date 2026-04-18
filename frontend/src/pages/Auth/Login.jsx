@@ -6,49 +6,36 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-
-
 const validateEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 };
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
-
   const {updateUser} = useContext(UserContext)
-
   const togglePassword = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
-
-  
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("Email:", email, "Password:", password);
-
     if (!validateEmail(email)) {
       setError("Please enter a valid email address!");
       return;
     }
-
     if (!password) {
       setError("Please enter the password!");
       return;
     }
-
     setError("");
-    
     try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
         password,
       });
-
       const { token, user } = response.data;
-
       if (token) {
         localStorage.setItem("token", token);
         updateUser(user)
@@ -62,7 +49,6 @@ const Login = () => {
       }
     }
   };
-
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
@@ -70,7 +56,6 @@ const Login = () => {
         <p className="text-xl text-slate-700 mt-[5px] mb-6">
           Please Enter Your Details To LogIn !!
         </p>
-
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="block text-sm text-gray-700 mb-1">
@@ -86,7 +71,6 @@ const Login = () => {
               required
             />
           </div>
-
           <div className="relative">
             <label className="block text-sm text-gray-700 mb-1">Password</label>
             <input
@@ -105,26 +89,22 @@ const Login = () => {
               {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </div>
           </div>
-
           <button
             type="submit"
             className="w-full bg-purple-700 text-white py-2 hover:bg-fuchsia-700 rounded-xl transition"
           >
             Log In
           </button>
-
           <p className="text-[13px] text-slate-800 mt-3">
             Don't have an account?{" "}
             <Link className="font-medium text-primary underline" to="/signup">
               Sign Up
             </Link>
           </p>
-
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
       </div>
     </AuthLayout>
   );
 };
-
-export default Login;
+export default Login;

@@ -3,17 +3,14 @@ import { LuPlus } from "react-icons/lu";
 import CustomBarChart from "../../components/Charts/CustomBarChart";
 import { prepareIncomeBarChartData } from "../../utils/helper";
 import AddGoalForm from "../Income/AddGoalForm";
-
 const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
   const [chartData, setChartData] = useState([]);
   const [showGoalForm, setShowGoalForm] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [incomeGoalData, setIncomeGoalData] = useState(null);
-
   useEffect(() => {
     setChartData(prepareIncomeBarChartData(transactions));
   }, [transactions]);
-
   useEffect(() => {
     if (incomeGoalData && transactions.length > 0) {
       const totalIncome = transactions.reduce(
@@ -25,18 +22,15 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
       }
     }
   }, [incomeGoalData, transactions]);
-
   useEffect(() => {
     if (operationMessage) setToastMessage(operationMessage);
   }, [operationMessage]);
-
   useEffect(() => {
     if (toastMessage) {
       const timer = setTimeout(() => setToastMessage(""), 3000);
       return () => clearTimeout(timer);
     }
   }, [toastMessage]);
-
   const handleSetIncomeGoal = (goalData) => {
     const isUpdate = incomeGoalData !== null;
     setIncomeGoalData(goalData);
@@ -47,7 +41,6 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
     );
     setShowGoalForm(false);
   };
-
   return (
     <div className="card relative p-4 bg-white rounded-2xl shadow-md">
       {toastMessage && (
@@ -57,7 +50,6 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
           </div>
         </div>
       )}
-
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-purple-800">Income Overview</h2>
@@ -65,7 +57,6 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
             Track your earnings over time and analyze your income trends!
           </p>
         </div>
-
         <div className="flex gap-2">
           <button
             onClick={() => setShowGoalForm((prev) => !prev)}
@@ -74,7 +65,6 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
             {showGoalForm ? "CLOSE INCOME GOAL" : "ADD INCOME GOAL"}
             <LuPlus className="ml-2 text-base" />
           </button>
-
           <button
             onClick={onAddIncome}
             className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition duration-200"
@@ -84,13 +74,11 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
           </button>
         </div>
       </div>
-
       {showGoalForm && (
         <div className="mt-6 p-6 border border-purple-300 rounded-2xl bg-purple-100 shadow-md transition-all duration-300 animate-fade-in">
           <AddGoalForm onIncomeGoal={handleSetIncomeGoal} />
         </div>
       )}
-
       <div className="mt-10">
         {chartData.length === 0 ? (
           <p className="text-center text-gray-400">No income data to display.</p>
@@ -101,5 +89,4 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
     </div>
   );
 };
-
-export default IncomeOverview;
+export default IncomeOverview;

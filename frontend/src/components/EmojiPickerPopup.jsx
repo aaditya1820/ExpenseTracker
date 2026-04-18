@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import { LuImage, LuX } from "react-icons/lu";
-
 const EmojiPickerPopup = ({ icon, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="relative w-full flex flex-col items-center gap-2">
       <label className="text-sm font-medium text-gray-700">Pick Emoji</label>
-
       <div
         className="flex flex-col items-center cursor-pointer group"
         onClick={() => setIsOpen(true)}
@@ -28,7 +25,6 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
           {icon ? "Change Icon" : "Pick Icon"}
         </p>
       </div>
-
       {isOpen && (
         <div className="absolute top-24 z-[999] w-[340px] bg-white border border-gray-300 rounded-xl shadow-xl">
           <div className="flex justify-end p-2">
@@ -39,7 +35,6 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
               <LuX className="w-5 h-5" />
             </button>
           </div>
-
           <div className="px-2 pb-3 max-h-[420px] overflow-y-auto">
             <EmojiPicker
               open={isOpen}
@@ -59,5 +54,4 @@ const EmojiPickerPopup = ({ icon, onSelect }) => {
     </div>
   );
 };
-
-export default EmojiPickerPopup;
+export default EmojiPickerPopup;

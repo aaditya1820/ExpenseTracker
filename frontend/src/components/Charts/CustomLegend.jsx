@@ -1,5 +1,4 @@
 import React from "react";
-
 const CustomLegend = ({ payload }) => {
   return (
     <div className="flex flex-wrap gap-4 p-4 bg-white rounded-xl shadow-md">
@@ -20,5 +19,4 @@ const CustomLegend = ({ payload }) => {
     </div>
   );
 };
-
-export default CustomLegend;
+export default CustomLegend;

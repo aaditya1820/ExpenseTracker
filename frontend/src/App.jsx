@@ -1,13 +1,10 @@
 import React from "react";
-
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-
 import Login from "./pages/Auth/Login.jsx";
 import SignUp from "./pages/Auth/SignUp.jsx";
 import Income from "./pages/Dashboard/Income.jsx";
@@ -15,7 +12,6 @@ import Home from "./pages/Dashboard/Home.jsx";
 import Expense from "./pages/Dashboard/Expense.jsx";
 import UserProvider from "./context/UserContext.jsx";
 import { Toaster } from "react-hot-toast";
-
 const App = () => {
   return (
     <UserProvider>
@@ -40,9 +36,7 @@ const App = () => {
     </UserProvider>
   );
 };
-
 export default App;
-
 const Root = () => {
   const isAuthenticated = !!localStorage.getItem("token");
   return isAuthenticated ? (

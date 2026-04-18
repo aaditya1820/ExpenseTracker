@@ -1,8 +1,6 @@
 import React from "react";
-
 const Modal = ({ children, isOpen, onClose, title }) => {
   if (!isOpen) return null;
-
   return (
 <div className="fixed inset-0 z-[999] flex justify-center items-center bg-black/30 backdrop-blur-sm min-h-screen">
       <div className="bg-gray-100 rounded-xl shadow-lg w-full max-w-2xl mx-4">
@@ -34,5 +32,4 @@ const Modal = ({ children, isOpen, onClose, title }) => {
     </div>
   );
 };
-
-export default Modal;
+export default Modal;

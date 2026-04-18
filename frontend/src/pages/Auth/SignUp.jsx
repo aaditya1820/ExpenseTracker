@@ -1,16 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-
 import AuthLayout from "../../components/layouts/AuthLayout";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector.jsx";
 import { UserContext } from "../../context/UserContext.jsx";
-
 import { validateEmail } from "../../utils/helper.js";
 import uploadImage from "../../utils/uploadImage.js";
 import axiosInstance from "../../utils/axiosInstance.js";
 import { API_PATHS } from "../../utils/apiPaths";
-
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullname, setFullName] = useState("");
@@ -20,13 +17,10 @@ const SignUp = () => {
   const [error, setError] = useState(null);
   const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
-
   const togglePassword = () => setShowPassword(!showPassword);
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     let profileImageUrl = "";
-
     if (!fullname) {
       setError("Please enter your name");
       return;
@@ -39,9 +33,7 @@ const SignUp = () => {
       setError("Please enter the password");
       return;
     }
-
     setError("");
-
     try {
       if (profilePic) {
         try {
@@ -52,16 +44,13 @@ const SignUp = () => {
           return;
         }
       }
-
       const payload = {
         fullName: fullname,
         email,
         password,
         profileImageUrl,
       };
-
-      console.log("Payload before sending:", payload); // helpful to verify
-
+      console.log("Payload before sending:", payload); 
       const response = await axiosInstance.post(
         API_PATHS.AUTH.REGISTER,
         payload,
@@ -71,9 +60,7 @@ const SignUp = () => {
           },
         }
       );
-
       const { token, user } = response.data;
-
       if (token) {
         localStorage.setItem("token", token);
         updateUser(user);
@@ -88,7 +75,6 @@ const SignUp = () => {
       }
     }
   };
-
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
@@ -96,12 +82,10 @@ const SignUp = () => {
         <p className="text-xl text-slate-700 mt-[5px] mb-6">
           Join us today by entering your details below !!
         </p>
-
         <form onSubmit={handleSignUp} className="space-y-5">
           <div className="flex justify-center">
             <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
           </div>
-
           <div>
             <label className="block text-sm text-gray-700 mb-1">
               Full Name
@@ -116,7 +100,6 @@ const SignUp = () => {
               required
             />
           </div>
-
           <div>
             <label className="block text-sm text-gray-700 mb-1">
               Email Address
@@ -131,7 +114,6 @@ const SignUp = () => {
               required
             />
           </div>
-
           <div className="col-span-2">
             <label className="block text-sm text-gray-700 mb-1">Password</label>
             <div className="relative">
@@ -152,26 +134,22 @@ const SignUp = () => {
               </div>
             </div>
           </div>
-
           <button
             type="submit"
             className="w-full bg-purple-700 text-white py-2 hover:bg-fuchsia-700 rounded-xl transition"
           >
             Sign Up
           </button>
-
           <p className="text-[13px] text-slate-800 mt-3">
             Already have an account?{" "}
             <Link className="font-medium text-primary underline" to="/login">
               Log In
             </Link>
           </p>
-
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
       </div>
     </AuthLayout>
   );
 };
-
-export default SignUp;
+export default SignUp;

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import EmojiPickerPopup from "../EmojiPickerPopup";
-
 const AddIncomeForm = ({ onAddIncome }) => {
   const [income, setIncome] = useState({
     source: "",
@@ -8,21 +7,16 @@ const AddIncomeForm = ({ onAddIncome }) => {
     date: "",
     icon: "",
   });
-
   const handleChange = (key, value) => {
     setIncome({ ...income, [key]: value });
   };
-
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl space-y-5 max-w-md w-full mx-auto border border-gray-200">
-
     <EmojiPickerPopup 
     icon={income.icon}
     onSelect={(selectedIcon)=>handleChange("icon" , selectedIcon)}/>
-
       <h2 className="text-2xl font-semibold text-center text-purple-700">Add Income</h2>
-
-      {/* Income Source */}
+      {}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">Income Source</label>
         <input
@@ -33,8 +27,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm transition-all"
         />
       </div>
-
-      {/* Amount */}
+      {}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">Amount</label>
         <input
@@ -45,8 +38,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm transition-all"
         />
       </div>
-
-      {/* Date */}
+      {}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-1">Date</label>
         <input
@@ -56,8 +48,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-sm transition-all"
         />
       </div>
-
-      {/* Submit Button */}
+      {}
       <div className="flex justify-center pt-2">
         <button
           type="button"
@@ -70,5 +61,4 @@ const AddIncomeForm = ({ onAddIncome }) => {
     </div>
   );
 };
-
-export default AddIncomeForm;
+export default AddIncomeForm;

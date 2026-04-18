@@ -1,9 +1,7 @@
 import React from "react";
-
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const { category, amount } = payload[0].payload;
-
     return (
       <div className="bg-white shadow-lg rounded-xl px-4 py-2 border border-purple-300">
         {category && (
@@ -22,5 +20,4 @@ const CustomTooltip = ({ active, payload }) => {
   }
   return null;
 };
-
-export default CustomTooltip;
+export default CustomTooltip;

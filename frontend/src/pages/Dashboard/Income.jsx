@@ -11,10 +11,8 @@ import "jspdf-autotable";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import toast from "react-hot-toast";
-
 const Income = () => {
   useUserAuth();
-
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
@@ -22,11 +20,9 @@ const Income = () => {
     show: false,
     data: null,
   });
-
   const fetchIncomeDetails = async () => {
     if (loading) return;
     setLoading(true);
-
     try {
       const response = await axiosInstance.get(API_PATHS.INCOME.GET_ALL_INCOME);
       if (response.data) {
@@ -38,10 +34,8 @@ const Income = () => {
       setLoading(false);
     }
   };
-
   const handleAddIncome = async (income) => {
     const { source, amount, date, icon } = income;
-
     if (!source.trim()) {
       toast.error("Source is required");
     }
@@ -53,7 +47,6 @@ const Income = () => {
       toast.error("Date is required!");
       return;
     }
-
     try {
       await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
         source,
@@ -71,11 +64,9 @@ const Income = () => {
       );
     }
   };
-
   const deleteIncome = async (id) => {
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
-
       setOpenDeleteAlert({ show: false, data: null });
       toast.success("Income details deleted successfully");
       fetchIncomeDetails();
@@ -86,12 +77,10 @@ const Income = () => {
       );
     }
   };
-
   const handleDownloadIncomeDetails = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
     doc.text("Income Details", 14, 22);
-
     const tableColumn = ["Source", "Amount", "Date"];
     const tableRows = incomeData.map((income) => [
       income.source,
@@ -102,20 +91,16 @@ const Income = () => {
         year: "numeric",
       }),
     ]);
-
     doc.autoTable({
       head: [tableColumn],
       body: tableRows,
       startY: 30,
     });
-
     doc.save("income-details.pdf");
   };
-
   useEffect(() => {
     fetchIncomeDetails();
   }, []);
-
   return (
     <DashboardLayout activeMenu="Income">
       <div className="my-5 mx-auto">
@@ -124,7 +109,6 @@ const Income = () => {
             transactions={incomeData}
             onAddIncome={() => setOpenAddIncomeModal(true)}
           />
-
           <IncomeList
             transactions={incomeData}
             onDelete={(id) => {
@@ -133,7 +117,6 @@ const Income = () => {
             onDownload={handleDownloadIncomeDetails}
           />
         </div>
-
         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
@@ -141,7 +124,6 @@ const Income = () => {
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
         </Modal>
-
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
@@ -156,5 +138,4 @@ const Income = () => {
     </DashboardLayout>
   );
 };
-
-export default Income;
+export default Income;

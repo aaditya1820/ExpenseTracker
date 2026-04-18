@@ -3,17 +3,14 @@ import { LuPlus } from "react-icons/lu";
 import CustomLineChart from "../../components/Charts/CustomLineChart";
 import { prepareExpenseLineChartData } from "../../utils/helper";
 import ExpenseLimitModal from "../Expense/AddExpenseLimit";
-
 const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operationMessage }) => {
   const [chartData, setChartData] = useState([]);
   const [showExpenseLimitModal, setShowExpenseLimitModal] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [expenseLimitData, setExpenseLimitData] = useState(null);
-
   useEffect(() => {
     setChartData(prepareExpenseLineChartData(transactions));
   }, [transactions]);
-
   useEffect(() => {
     if (expenseLimitData && transactions.length > 0) {
       const totalExpense = transactions.reduce((sum, txn) => sum + (txn.amount || 0), 0);
@@ -22,18 +19,15 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
       }
     }
   }, [expenseLimitData, transactions]);
-
   useEffect(() => {
     if (operationMessage) setToastMessage(operationMessage);
   }, [operationMessage]);
-
   useEffect(() => {
     if (toastMessage) {
       const timer = setTimeout(() => setToastMessage(""), 3000);
       return () => clearTimeout(timer);
     }
   }, [toastMessage]);
-
   const handleSetExpenseLimit = (limitData) => {
     const isUpdate = expenseLimitData !== null;
     setExpenseLimitData(limitData);
@@ -45,7 +39,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
     onExpenseLimit(limitData);
     setShowExpenseLimitModal(false);
   };
-
   return (
     <div className="card relative p-4 bg-white rounded-2xl shadow-md">
       {toastMessage && (
@@ -55,7 +48,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
           </div>
         </div>
       )}
-
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-purple-800">Expense Overview</h2>
@@ -63,7 +55,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
             Monitor your spending patterns and manage your expenses better!
           </p>
         </div>
-
         <div className="flex gap-2">
           <button
             onClick={() => setShowExpenseLimitModal((prev) => !prev)}
@@ -72,7 +63,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
             {showExpenseLimitModal ? "CLOSE EXPENSE LIMIT" : "ADD EXPENSE LIMIT"}
             <LuPlus className="ml-2 text-base" />
           </button>
-
           <button
             onClick={onAddExpense}
             className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition duration-200"
@@ -82,7 +72,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
           </button>
         </div>
       </div>
-
       {showExpenseLimitModal && (
         <div className="mt-6 p-6 border border-purple-300 rounded-2xl bg-purple-100 shadow-md transition-all duration-300 animate-fade-in">
           <ExpenseLimitModal
@@ -91,7 +80,6 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
           />
         </div>
       )}
-
       <div className="mt-10">
         {chartData.length === 0 ? (
           <p className="text-center text-gray-400">No expense data to display.</p>
@@ -102,5 +90,4 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
     </div>
   );
 };
-
-export default ExpenseOverview;
+export default ExpenseOverview;
