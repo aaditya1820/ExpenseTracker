@@ -72,27 +72,18 @@ const IncomeOverview = ({ transactions, onAddIncome, showGoalForm, setShowGoalFo
             Monitor earnings and track your goals.
           </p>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={onAddIncome}
-            className="add-btn !py-2 !px-4 text-xs"
-          >
-            <LuPlus />
-            Add Income
-          </button>
-        </div>
       </div>
 
-      <div className="p-6 md:p-8">
+      <div className="p-6 md:p-8 flex flex-col gap-8">
         {showGoalForm && (
-          <div className="mb-8 p-6 border border-blue-100 rounded-2xl bg-blue-50/50 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="p-6 border border-blue-100 rounded-2xl bg-blue-50/50 animate-in fade-in slide-in-from-top-4 duration-300">
             <h3 className="text-sm font-bold text-blue-900 mb-4 uppercase tracking-widest">Set Your Monthly Goal</h3>
             <AddGoalForm onIncomeGoal={handleSetIncomeGoal} initialData={incomeGoalData} />
           </div>
         )}
 
         {incomeGoalData && incomeGoalData.incomeGoal > 0 && (
-          <div className="mb-8 flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-100">
+          <div className="flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-100">
              <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
                    <LuCircleCheck size={20} />
@@ -124,6 +115,14 @@ const IncomeOverview = ({ transactions, onAddIncome, showGoalForm, setShowGoalFo
             <CustomBarChart data={chartData} />
           )}
         </div>
+
+        <button
+          onClick={onAddIncome}
+          className="add-btn w-full justify-center py-4 text-base shadow-lg shadow-blue-500/10"
+        >
+          <LuPlus />
+          Add Income
+        </button>
       </div>
     </div>
   );

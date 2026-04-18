@@ -69,20 +69,11 @@ const ExpenseOverview = ({ transactions, onAddExpense, showLimitForm, setShowLim
             Track spending habits and manage limits.
           </p>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={onAddExpense}
-            className="add-btn !py-2 !px-4 text-xs"
-          >
-            <LuPlus />
-            Add Expense
-          </button>
-        </div>
       </div>
 
-      <div className="p-6 md:p-8">
+      <div className="p-6 md:p-8 flex flex-col gap-8">
         {showLimitForm && (
-          <div className="mb-8 p-6 border border-blue-100 rounded-2xl bg-blue-50/50 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="p-6 border border-blue-100 rounded-2xl bg-blue-50/50 animate-in fade-in slide-in-from-top-4 duration-300">
              <h3 className="text-sm font-bold text-blue-900 mb-4 uppercase tracking-widest">Set Your Spending Limit</h3>
              <ExpenseLimitModal
                onClose={() => setShowLimitForm(false)}
@@ -93,7 +84,7 @@ const ExpenseOverview = ({ transactions, onAddExpense, showLimitForm, setShowLim
         )}
 
         {expenseLimitData && expenseLimitData.expenseLimit > 0 && (
-          <div className="mb-8 flex items-center justify-between p-4 bg-rose-50 rounded-2xl border border-rose-100">
+          <div className="flex items-center justify-between p-4 bg-rose-50 rounded-2xl border border-rose-100">
              <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center text-white shadow-lg shadow-rose-500/20">
                    <LuTriangleAlert size={20} />
@@ -125,6 +116,14 @@ const ExpenseOverview = ({ transactions, onAddExpense, showLimitForm, setShowLim
             <CustomLineChart data={chartData} />
           )}
         </div>
+
+        <button
+          onClick={onAddExpense}
+          className="add-btn w-full justify-center py-4 text-base shadow-lg shadow-blue-500/10"
+        >
+          <LuPlus />
+          Add Expense
+        </button>
       </div>
     </div>
   );
