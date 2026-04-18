@@ -23,7 +23,7 @@ app.use("/api/v1/dashboard" , dashboardRoutes);
 app.use("/api/v1/goal", goalRoutes);
 app.use("/uploads" , express.static(path.join(__dirname , "uploads")));
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 });
 const PORT = process.env.PORT || 5000;
