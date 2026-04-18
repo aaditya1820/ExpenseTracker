@@ -66,7 +66,6 @@ const SideMenu = ({ activeMenu, closeMobileMenu }) => {
           <h5 className="text-blue-900 font-bold text-lg tracking-tight">
             {user?.fullName || "User"}
           </h5>
-          <p className="text-blue-400 text-[10px] font-bold uppercase tracking-widest mt-1">Premium Plan</p>
         </div>
       </div>
 
