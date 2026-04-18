@@ -24,3 +24,7 @@ pnpm-debug.log*
 # SQLite
 *.db
 *.db-journal
+
+# Uploads
+backend/uploads/*
+!backend/uploads/.gitkeep
