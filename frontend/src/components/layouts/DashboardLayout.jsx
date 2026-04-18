@@ -10,7 +10,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex flex-col relative">
+    <div className="min-h-screen bg-[#03045e] flex flex-col relative">
       <Navbar 
         activeMenu={activeMenu} 
         toggleMobileMenu={toggleMobileMenu}
@@ -26,14 +26,14 @@ const DashboardLayout = ({ children, activeMenu }) => {
         {/* Mobile Sidebar Overlay */}
         {isMobileMenuOpen && (
           <div 
-            className="fixed inset-0 z-40 bg-black/80 md:hidden transition-all duration-300"
+            className="fixed inset-0 z-40 bg-[#03045e]/80 md:hidden transition-all duration-300"
             onClick={toggleMobileMenu}
           />
         )}
 
         {/* Mobile Sidebar */}
         <aside className={`
-          fixed top-20 left-0 z-50 w-72 h-[calc(100vh-80px)] bg-[#0a0a0a] transform transition-transform duration-300 ease-in-out md:hidden border-r border-neutral-900
+          fixed top-20 left-0 z-50 w-72 h-[calc(100vh-80px)] bg-[#03045e] transform transition-transform duration-300 ease-in-out md:hidden border-r border-[#0077b6]
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
           <SideMenu activeMenu={activeMenu} />
@@ -49,6 +49,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
     </div>
   );
 };
+
 
 export default DashboardLayout;
 

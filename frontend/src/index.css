@@ -6,16 +6,26 @@
   --font-display: "Outfit", "sans-serif";
   --breakpoint-3xl: 1920px;
   
-  --color-primary: #10b981;
-  --color-primary-light: #34d399;
-  --color-primary-dark: #059669;
+  /* Color Palette from coolors.co */
+  --color-blue-900: #03045e;
+  --color-blue-800: #023e8a;
+  --color-blue-700: #0077b6;
+  --color-blue-600: #0096c7;
+  --color-blue-500: #00b4d8;
+  --color-blue-400: #48cae4;
+  --color-blue-300: #90e0ef;
+  --color-blue-200: #ade8f4;
+  --color-blue-100: #caf0f8;
+
+  --color-primary: var(--color-blue-500);
+  --color-primary-light: var(--color-blue-300);
+  --color-primary-dark: var(--color-blue-700);
   
-  /* Minimal Dark Palette */
-  --color-bg-dark: #0a0a0a;
-  --color-card-dark: #141414;
-  --color-border-dark: #262626;
-  --color-text-main: #f5f5f5;
-  --color-text-muted: #737373;
+  --color-bg: var(--color-blue-900);
+  --color-card: var(--color-blue-800);
+  --color-border: var(--color-blue-700);
+  --color-text-main: var(--color-blue-100);
+  --color-text-muted: var(--color-blue-300);
 }
 
 @layer base {
@@ -29,38 +39,43 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
+    color: var(--color-blue-100);
   }
 
   body {
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-bg);
     color: var(--color-text-main);
     overflow-x: hidden;
+  }
+
+  * {
+    box-shadow: none !important;
   }
 }
 
 @layer components {
   .glass-effect {
-    @apply bg-black/40 backdrop-blur-md border-b border-white/5;
+    @apply bg-blue-900/80 backdrop-blur-md border-b border-blue-700;
   }
 
   .input-box {
-    @apply w-full text-sm text-slate-200 bg-neutral-900 rounded-xl px-4 py-3.5 mb-4 mt-2 border border-neutral-800 outline-none transition-all duration-200 focus:border-primary/50 focus:bg-neutral-800;
+    @apply w-full text-sm text-blue-100 bg-blue-900 rounded-xl px-4 py-3.5 mb-4 mt-2 border border-blue-700 outline-none transition-all duration-200 focus:border-blue-400;
   }
 
   .card {
-    @apply bg-neutral-900 p-8 rounded-3xl border border-neutral-800 transition-all duration-300 hover:border-neutral-700;
+    @apply bg-blue-800 p-8 rounded-3xl border border-blue-700 transition-all duration-300;
   }
 
   .card-btn {
-    @apply flex items-center gap-2 text-sm font-medium text-neutral-400 hover:text-white bg-neutral-800/50 hover:bg-neutral-800 px-4 py-2 rounded-xl border border-neutral-800 transition-all duration-200;
+    @apply flex items-center gap-2 text-sm font-medium text-blue-300 hover:text-white bg-blue-900 px-4 py-2 rounded-xl border border-blue-700 transition-all duration-200;
   }
 
   .add-btn {
-    @apply flex items-center gap-2 text-sm font-semibold text-primary-light bg-primary/10 border border-primary/20 rounded-xl px-5 py-2.5 transition-all duration-200 hover:bg-primary/20 cursor-pointer active:scale-95;
+    @apply flex items-center gap-2 text-sm font-semibold text-blue-100 bg-blue-700 border border-blue-600 rounded-xl px-5 py-2.5 transition-all duration-200 hover:bg-blue-600 cursor-pointer active:scale-95;
   }
 
   .add-btn-fill {
-    @apply text-white bg-primary hover:bg-primary-dark border-transparent shadow-none;
+    @apply text-blue-900 bg-blue-300 hover:bg-blue-200 border-transparent;
   }
 
   .nav-item {
@@ -68,16 +83,16 @@
   }
 
   .nav-item-active {
-    @apply text-white bg-primary/10 border border-primary/20;
+    @apply text-blue-900 bg-blue-300;
   }
 
   .nav-item-inactive {
-    @apply text-neutral-500 hover:bg-neutral-900 hover:text-neutral-200;
+    @apply text-blue-400 hover:bg-blue-800 hover:text-blue-100;
   }
 
-  .stats-gradient-1 { @apply bg-neutral-800; }
-  .stats-gradient-2 { @apply bg-emerald-500/10 text-emerald-500 border border-emerald-500/20; }
-  .stats-gradient-3 { @apply bg-rose-500/10 text-rose-500 border border-rose-500/20; }
+  .stats-gradient-1 { @apply bg-blue-800 border border-blue-700; }
+  .stats-gradient-2 { @apply bg-blue-800 border border-blue-700; }
+  .stats-gradient-3 { @apply bg-blue-800 border border-blue-700; }
 }
 
 /* Minimal Scrollbar */
@@ -86,11 +101,12 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  @apply bg-blue-900;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-800 rounded-full hover:bg-neutral-700;
+  @apply bg-blue-700 rounded-full hover:bg-blue-600;
 }
+
 
 

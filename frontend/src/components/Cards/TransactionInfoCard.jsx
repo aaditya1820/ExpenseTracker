@@ -18,8 +18,8 @@ const TransactionInfoCard = ({
   const isIncome = type === "income";
 
   return (
-    <div className="group flex items-center gap-4 py-4 px-2 hover:bg-neutral-800/30 rounded-2xl transition-all border border-transparent hover:border-neutral-800">
-      <div className="w-12 h-12 flex items-center justify-center text-xl text-neutral-400 bg-neutral-900 rounded-xl border border-neutral-800 transition-all">
+    <div className="group flex items-center gap-4 py-4 px-2 hover:bg-[#023e8a]/50 rounded-2xl transition-all border border-transparent hover:border-[#0077b6]">
+      <div className="w-12 h-12 flex items-center justify-center text-xl text-[#ade8f4] bg-[#023e8a] rounded-xl border border-[#0077b6] transition-all">
         {icon ? (
           <img src={icon} alt={title} className="w-6 h-6 object-contain" />
         ) : (
@@ -29,19 +29,19 @@ const TransactionInfoCard = ({
 
       <div className="flex-1 flex items-center justify-between min-w-0">
         <div className="truncate mr-4">
-          <p className="text-sm font-bold text-white truncate">{title}</p>
-          <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest mt-1">{date}</p>
+          <p className="text-sm font-bold text-[#caf0f8] truncate">{title}</p>
+          <p className="text-[10px] font-bold text-[#48cae4] uppercase tracking-widest mt-1">{date}</p>
         </div>
 
         <div className="flex items-center gap-4 shrink-0">
-          <div className={`flex items-center gap-1.5 font-bold text-sm ${isIncome ? "text-primary" : "text-rose-500"}`}>
+          <div className={`flex items-center gap-1.5 font-bold text-sm ${isIncome ? "text-[#90e0ef]" : "text-[#00b4d8]"}`}>
             <span>{isIncome ? "+" : "-"}₹{amount}</span>
             {isIncome ? <LuArrowUpRight size={14} /> : <LuArrowDownRight size={14} />}
           </div>
 
           {!hideDeleteBtn && (
             <button
-              className="p-2 text-neutral-600 hover:text-rose-500 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
+              className="p-2 text-[#0077b6] hover:text-[#f43f5e] transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
               onClick={onDelete}
             >
               <LuTrash2 size={18} />
@@ -54,6 +54,7 @@ const TransactionInfoCard = ({
 };
 
 export default TransactionInfoCard;
+
 
 
 
