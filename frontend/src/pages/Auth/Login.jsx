@@ -70,7 +70,7 @@ const Login = () => {
             onChange={({ target }) => setEmail(target.value)}
             placeholder="name@email.com"
             type="email"
-            className="input-box placeholder:text-blue-200"
+            className="input-box placeholder:text-blue-900"
             required
           />
         </div>
@@ -83,7 +83,7 @@ const Login = () => {
               onChange={({ target }) => setPassword(target.value)}
               placeholder="••••••••"
               type={showPassword ? "text" : "password"}
-              className="input-box pr-12 placeholder:text-blue-200"
+              className="input-box pr-12 placeholder:text-blue-900"
               required
             />
             <button

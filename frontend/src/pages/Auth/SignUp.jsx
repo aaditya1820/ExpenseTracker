@@ -54,10 +54,10 @@ const SignUp = () => {
         password,
         profileImageUrl,
       };
-      
+
       const response = await axiosInstance.post(
         API_PATHS.AUTH.REGISTER,
-        payload
+        payload,
       );
       const { token, user } = response.data;
       if (token) {
@@ -77,8 +77,12 @@ const SignUp = () => {
   return (
     <AuthLayout>
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-blue-900 tracking-tight">Create Account</h2>
-        <p className="text-blue-400 font-medium mt-1 text-sm">Join CashSprout and track properly.</p>
+        <h2 className="text-3xl font-bold text-blue-900 tracking-tight">
+          Create Account
+        </h2>
+        <p className="text-blue-400 font-medium mt-1 text-sm">
+          Join CashSprout and track properly.
+        </p>
       </div>
 
       <form onSubmit={handleSignUp} className="space-y-4">
@@ -96,7 +100,7 @@ const SignUp = () => {
               onChange={({ target }) => setFullName(target.value)}
               placeholder="Enter Full Name"
               type="text"
-              className="input-box !mt-1 !mb-0 placeholder:text-blue-200"
+              className="input-box !mt-1 !mb-0 placeholder:text-blue-900"
               required
             />
           </div>
@@ -110,20 +114,22 @@ const SignUp = () => {
               onChange={({ target }) => setEmail(target.value)}
               placeholder="name@email.com"
               type="email"
-              className="input-box !mt-1 !mb-0 placeholder:text-blue-200"
+              className="input-box !mt-1 !mb-0 placeholder:text-blue-900"
               required
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-bold text-blue-900 uppercase tracking-widest ml-1">Password</label>
+            <label className="text-[10px] font-bold text-blue-900 uppercase tracking-widest ml-1">
+              Password
+            </label>
             <div className="relative">
               <input
                 value={password}
                 onChange={({ target }) => setPassword(target.value)}
                 placeholder="••••••••"
                 type={showPassword ? "text" : "password"}
-                className="input-box !mt-1 !mb-0 pr-12 placeholder:text-blue-200"
+                className="input-box !mt-1 !mb-0 pr-12 placeholder:text-blue-900"
                 required
               />
               <button
@@ -131,7 +137,11 @@ const SignUp = () => {
                 onClick={togglePassword}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-300 hover:text-blue-600 transition-colors"
               >
-                {showPassword ? <FaRegEyeSlash size={16} /> : <FaRegEye size={16} />}
+                {showPassword ? (
+                  <FaRegEyeSlash size={16} />
+                ) : (
+                  <FaRegEye size={16} />
+                )}
               </button>
             </div>
           </div>
@@ -152,7 +162,10 @@ const SignUp = () => {
 
         <p className="text-center text-slate-500 text-xs font-medium">
           Member?{" "}
-          <Link className="text-blue-600 hover:text-blue-800 font-bold underline underline-offset-4" to="/login">
+          <Link
+            className="text-blue-600 hover:text-blue-800 font-bold underline underline-offset-4"
+            to="/login"
+          >
             Sign In
           </Link>
         </p>
@@ -162,6 +175,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-
-
