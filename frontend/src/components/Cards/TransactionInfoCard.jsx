@@ -1,8 +1,8 @@
 import React from "react";
 import {
   LuUtensils,
-  LuTrendingUp,
-  LuTrendingDown,
+  LuArrowUpRight,
+  LuArrowDownRight,
   LuTrash2,
 } from "react-icons/lu";
 
@@ -15,16 +15,13 @@ const TransactionInfoCard = ({
   hideDeleteBtn,
   onDelete,
 }) => {
-  const getAmountStyles = () =>
-    type === "income" 
-      ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" 
-      : "text-rose-400 bg-rose-500/10 border-rose-500/20";
+  const isIncome = type === "income";
 
   return (
-    <div className="group flex items-center gap-4 p-5 rounded-[2rem] hover:bg-white/5 transition-all duration-500 border border-transparent hover:border-white/5">
-      <div className="w-14 h-14 flex items-center justify-center text-2xl text-slate-300 bg-slate-800 rounded-2xl group-hover:scale-110 transition-all duration-500 shadow-xl">
+    <div className="group flex items-center gap-4 py-4 px-2 hover:bg-neutral-800/30 rounded-2xl transition-all border border-transparent hover:border-neutral-800">
+      <div className="w-12 h-12 flex items-center justify-center text-xl text-neutral-400 bg-neutral-900 rounded-xl border border-neutral-800 transition-all">
         {icon ? (
-          <img src={icon} alt={title} className="w-7 h-7 object-contain" />
+          <img src={icon} alt={title} className="w-6 h-6 object-contain" />
         ) : (
           <LuUtensils />
         )}
@@ -32,22 +29,22 @@ const TransactionInfoCard = ({
 
       <div className="flex-1 flex items-center justify-between min-w-0">
         <div className="truncate mr-4">
-          <p className="text-base font-bold text-white tracking-tight truncate group-hover:text-primary-light transition-colors">{title}</p>
-          <p className="text-xs font-black text-slate-500 uppercase tracking-widest mt-1">{date}</p>
+          <p className="text-sm font-bold text-white truncate">{title}</p>
+          <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest mt-1">{date}</p>
         </div>
 
         <div className="flex items-center gap-4 shrink-0">
-          <div className={`flex items-center gap-2 px-4 py-2 rounded-xl border font-black text-sm transition-all duration-500 ${getAmountStyles()}`}>
-            <span>{type === "income" ? "+" : "-"}₹{amount}</span>
-            {type === "income" ? <LuTrendingUp size={16} /> : <LuTrendingDown size={16} />}
+          <div className={`flex items-center gap-1.5 font-bold text-sm ${isIncome ? "text-primary" : "text-rose-500"}`}>
+            <span>{isIncome ? "+" : "-"}₹{amount}</span>
+            {isIncome ? <LuArrowUpRight size={14} /> : <LuArrowDownRight size={14} />}
           </div>
 
           {!hideDeleteBtn && (
             <button
-              className="p-3 text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
+              className="p-2 text-neutral-600 hover:text-rose-500 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
               onClick={onDelete}
             >
-              <LuTrash2 size={20} />
+              <LuTrash2 size={18} />
             </button>
           )}
         </div>
@@ -57,5 +54,6 @@ const TransactionInfoCard = ({
 };
 
 export default TransactionInfoCard;
+
 
 

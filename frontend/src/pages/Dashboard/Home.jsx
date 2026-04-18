@@ -5,7 +5,7 @@ import { useUserAuth } from "../../hooks/useUserAuth";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import InfoCard from "../../components/Cards/InfoCard";
-import { LuHandCoins, LuWalletMinimal, LuTrendingUp, LuPlus, LuLayoutDashboard } from "react-icons/lu";
+import { LuSprout, LuArrowUpRight, LuArrowDownRight, LuPlus } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import { addThousandsSeparator } from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
@@ -40,44 +40,38 @@ const Home = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="space-y-10 pb-10">
+      <div className="space-y-8">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white/[0.02] p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary-light text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-              <LuLayoutDashboard size={12} />
-              Command Center
-            </div>
-            <h1 className="text-5xl font-black text-white tracking-tighter leading-tight font-display">
-              Greetings, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-white">{user?.fullName?.split(' ')[0] || 'Nexus'}</span>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-neutral-900">
+          <div>
+            <h1 className="text-3xl font-bold text-white tracking-tight">
+              Hello, {user?.fullName?.split(' ')[0] || 'User'}
             </h1>
-            <p className="text-slate-500 mt-2 text-lg font-medium max-w-md">
-              Your financial nexus is synchronized and performing at optimal capacity.
+            <p className="text-neutral-500 mt-1 font-medium">
+              Your CashSprout overview is ready.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 relative z-10">
+          <div className="flex items-center gap-3">
             <button 
               onClick={() => navigate("/income")}
-              className="add-btn group"
+              className="add-btn"
             >
-              <LuPlus className="group-hover:rotate-90 transition-transform duration-300" /> 
-              <span>Register Income</span>
+              <LuPlus /> 
+              <span>Add Income</span>
             </button>
             <button 
               onClick={() => navigate("/expense")}
-              className="add-btn add-btn-fill group"
+              className="add-btn add-btn-fill"
             >
-              <LuPlus className="group-hover:rotate-90 transition-transform duration-300" /> 
-              <span>Log Expense</span>
+              <LuPlus /> 
+              <span>Add Expense</span>
             </button>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
             icon={<IoMdCard />}
             label="Total Balance"
@@ -85,21 +79,21 @@ const Home = () => {
             color="stats-gradient-1"
           />
           <InfoCard
-            icon={<LuWalletMinimal />}
-            label="Net Income"
+            icon={<LuArrowUpRight />}
+            label="Total Income"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color="stats-gradient-2"
           />
           <InfoCard
-            icon={<LuHandCoins />}
-            label="Total Outflow"
+            icon={<LuArrowDownRight />}
+            label="Total Expense"
             value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
             color="stats-gradient-3"
           />
         </div>
 
-        {/* Analytics & Activity Grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
+        {/* Analytics Grid */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           <FinanceOverview
             totalBalance={dashboardData?.totalBalance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
@@ -123,8 +117,8 @@ const Home = () => {
           />
         </div>
 
-        {/* Deep Data Lists */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
+        {/* Lists Grid */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 pb-10">
           <ExpenseTransactions
             transactions={dashboardData?.last30DaysExpenses?.transactions || []}
             onSeeMore={() => navigate("/expense")}
@@ -140,5 +134,6 @@ const Home = () => {
 };
 
 export default Home;
+
 
 

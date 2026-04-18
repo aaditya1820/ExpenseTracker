@@ -24,65 +24,57 @@ const SideMenu = ({ activeMenu }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#0b0f1a] p-6 border-r border-white/5 relative z-10">
-      <div className="flex flex-col items-center justify-center py-10 mb-8 rounded-[2.5rem] bg-gradient-to-b from-white/[0.03] to-transparent border border-white/5 shadow-2xl">
-        <div className="relative group cursor-pointer mb-5">
+    <div className="flex flex-col h-full bg-[#0a0a0a] p-6 border-r border-neutral-900">
+      <div className="flex flex-col items-center justify-center py-10 mb-8 border-b border-neutral-900">
+        <div className="relative mb-4">
           {user?.profileImageUrl ? (
             <img
               src={user.profileImageUrl}
               alt="Profile"
-              className="w-28 h-28 bg-slate-800 rounded-[2rem] object-cover ring-4 ring-white/5 transition-all duration-500 group-hover:ring-primary/40 group-hover:scale-105"
+              className="w-24 h-24 bg-neutral-800 rounded-2xl object-cover border border-neutral-800"
             />
           ) : (
             <CharAvatar
               fullname={user?.fullName || "User"}
-              width="w-28"
-              height="h-28"
-              style="text-3xl rounded-[2rem] ring-4 ring-white/5 transition-all duration-500 group-hover:ring-primary/40 group-hover:scale-105"
+              width="w-24"
+              height="h-24"
+              style="text-2xl rounded-2xl bg-neutral-800 border border-neutral-800"
             />
           )}
-          <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-500 border-4 border-[#0b0f1a] rounded-full animate-pulse shadow-lg shadow-emerald-500/20" />
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-primary border-4 border-[#0a0a0a] rounded-full" />
         </div>
         
         <div className="text-center">
-          <h5 className="text-white font-black text-xl tracking-tight mb-1">
-            {user?.fullName || "Nexus User"}
+          <h5 className="text-white font-bold text-lg tracking-tight">
+            {user?.fullName || "User"}
           </h5>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/5">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest">Premium Tier</span>
-          </div>
+          <p className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest mt-1">Premium Plan</p>
         </div>
       </div>
 
-      <div className="flex-1 space-y-2 overflow-y-auto custom-scrollbar pr-2">
+      <div className="flex-1 space-y-1.5 overflow-y-auto pr-2">
         {SIDE_MENU_DATA.map((item, index) => (
           <button
             key={`menu_${index}`}
-            className={`w-full nav-item group relative ${
+            className={`w-full nav-item group ${
               activeMenu === item.label
                 ? "nav-item-active"
                 : "nav-item-inactive"
             }`}
             onClick={() => handleClick(item.path)}
           >
-            <div className={`p-2 rounded-xl transition-colors ${activeMenu === item.label ? "bg-white/20" : "bg-white/5 group-hover:bg-white/10"}`}>
-              <item.icon className={`text-xl ${activeMenu === item.label ? "text-white" : "text-slate-400 group-hover:text-white"}`} />
-            </div>
-            <span className="text-sm font-bold flex-1 text-left">{item.label}</span>
-            {activeMenu === item.label && <LuChevronRight className="text-white/50" />}
+            <item.icon className={`text-xl ${activeMenu === item.label ? "text-primary" : "text-neutral-500 group-hover:text-neutral-200"}`} />
+            <span className="text-sm font-semibold flex-1 text-left">{item.label}</span>
           </button>
         ))}
       </div>
 
-      <div className="pt-6 mt-6 border-t border-white/5">
+      <div className="pt-6 mt-6 border-t border-neutral-900">
         <button
-          className="w-full flex items-center gap-4 py-4 px-6 rounded-2xl text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all duration-300 font-bold text-sm border border-transparent hover:border-rose-500/20 group active:scale-95"
+          className="w-full flex items-center gap-4 py-3.5 px-6 rounded-xl text-neutral-500 hover:bg-neutral-900 hover:text-rose-500 transition-all font-bold text-sm"
           onClick={handleLogout}
         >
-          <div className="p-2 rounded-xl bg-rose-500/10 group-hover:bg-rose-500/20 transition-colors">
-            <LuLogOut className="text-xl" />
-          </div>
+          <LuLogOut className="text-xl" />
           Sign Out
         </button>
       </div>
@@ -91,5 +83,6 @@ const SideMenu = ({ activeMenu }) => {
 };
 
 export default SideMenu;
+
 
 
