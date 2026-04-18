@@ -76,24 +76,26 @@ const SignUp = () => {
 
   return (
     <AuthLayout>
-      <div className="space-y-2 mb-8">
-        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Create Account</h2>
-        <p className="text-slate-500 font-medium">Join us today to start tracking your finances effectively.</p>
+      <div className="space-y-3 mb-10 text-center md:text-left">
+        <h2 className="text-4xl font-extrabold text-white tracking-tight font-display">
+          Join the <span className="text-primary-light">Revolution</span>
+        </h2>
+        <p className="text-slate-400 font-medium text-lg">Master your finances with our futuristic tracker.</p>
       </div>
 
-      <form onSubmit={handleSignUp} className="space-y-5">
-        <div className="flex justify-center mb-4">
+      <form onSubmit={handleSignUp} className="space-y-6">
+        <div className="flex justify-center mb-6">
           <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
         </div>
 
-        <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">
+        <div className="space-y-1">
+          <label className="block text-sm font-bold text-slate-300 ml-1">
             Full Name
           </label>
           <input
             value={fullname}
             onChange={({ target }) => setFullName(target.value)}
-            placeholder="John Doe"
+            placeholder="Enter Full Name"
             autoComplete="name"
             type="text"
             className="input-box m-0"
@@ -101,14 +103,14 @@ const SignUp = () => {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">
+        <div className="space-y-1">
+          <label className="block text-sm font-bold text-slate-300 ml-1">
             Email Address
           </label>
           <input
             value={email}
             onChange={({ target }) => setEmail(target.value)}
-            placeholder="name@example.com"
+            placeholder="name@nexus.com"
             autoComplete="email"
             type="email"
             className="input-box m-0"
@@ -116,8 +118,8 @@ const SignUp = () => {
           />
         </div>
 
-        <div className="relative">
-          <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Password</label>
+        <div className="space-y-1">
+          <label className="block text-sm font-bold text-slate-300 ml-1">Password</label>
           <div className="relative">
             <input
               value={password}
@@ -125,35 +127,35 @@ const SignUp = () => {
               placeholder="••••••••"
               autoComplete="new-password"
               type={showPassword ? "text" : "password"}
-              className="input-box m-0 pr-12"
+              className="input-box m-0 pr-14"
               required
             />
             <button
               type="button"
               onClick={togglePassword}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors cursor-pointer"
+              className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-primary-light transition-colors cursor-pointer"
             >
-              {showPassword ? <FaRegEyeSlash size={20} /> : <FaRegEye size={20} />}
+              {showPassword ? <FaRegEyeSlash size={22} /> : <FaRegEye size={22} />}
             </button>
           </div>
         </div>
 
         {error && (
-          <div className="bg-rose-50 border border-rose-100 text-rose-600 px-4 py-3 rounded-xl text-sm font-medium animate-shake">
+          <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-5 py-4 rounded-2xl text-sm font-bold animate-shake">
             {error}
           </div>
         )}
 
         <button
           type="submit"
-          className="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary-dark transition-all active:scale-[0.98] cursor-pointer"
+          className="w-full bg-gradient-to-br from-primary to-primary-dark text-white py-4 rounded-2xl font-bold text-lg shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-[0.98] cursor-pointer"
         >
           Create Account
         </button>
 
-        <p className="text-center text-slate-600 font-medium">
-          Already have an account?{" "}
-          <Link className="text-primary hover:text-primary-dark font-bold underline underline-offset-4" to="/login">
+        <p className="text-center text-slate-400 font-semibold pt-4">
+          Already a member?{" "}
+          <Link className="text-primary-light hover:text-white font-bold underline underline-offset-8 transition-all" to="/login">
             Sign In
           </Link>
         </p>
@@ -163,4 +165,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
 

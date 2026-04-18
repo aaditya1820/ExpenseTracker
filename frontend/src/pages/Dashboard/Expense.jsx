@@ -89,27 +89,34 @@ const Expense = () => {
 
   return (
     <DashboardLayout activeMenu="Expense">
-      <div className="space-y-8">
+      <div className="space-y-10 pb-10">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900">Expense Tracking</h1>
-            <p className="text-slate-500 mt-1 font-medium">
-              Monitor and manage your spending.
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/[0.02] p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          
+          <div className="relative z-10">
+            <h1 className="text-4xl font-black text-white tracking-tighter font-display">
+              Expense <span className="text-primary-light">Log</span>
+            </h1>
+            <p className="text-slate-500 mt-2 font-medium">
+              Track and optimize your capital outflow.
             </p>
           </div>
-          <div className="flex items-center gap-3">
+
+          <div className="flex items-center gap-4 relative z-10">
             <button 
               onClick={handleDownloadExpenseDetails}
-              className="add-btn"
+              className="add-btn group"
             >
-              <LuDownload /> Download PDF
+              <LuDownload className="group-hover:-translate-y-1 transition-transform duration-300" /> 
+              <span>Export Records</span>
             </button>
             <button 
               onClick={() => setOpenAddExpenseModal(true)}
-              className="add-btn add-btn-fill"
+              className="add-btn add-btn-fill group"
             >
-              <LuPlus /> Add Expense
+              <LuPlus className="group-hover:rotate-90 transition-transform duration-300" /> 
+              <span>New Expense</span>
             </button>
           </div>
         </div>
