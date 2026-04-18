@@ -59,7 +59,7 @@
   }
 
   .input-box {
-    @apply w-full text-sm text-slate-900 bg-gray-50 rounded-xl px-4 py-3.5 mb-4 mt-2 border border-gray-200 outline-none transition-all duration-200 focus:border-primary focus:bg-white;
+    @apply w-full text-sm text-slate-900 bg-gray-50 rounded-xl px-4 py-3.5 mb-4 mt-2 border border-gray-200 outline-none transition-all duration-200 focus:border-purple-500 focus:bg-white;
   }
 
   .card {
@@ -67,28 +67,39 @@
   }
 
   .card-btn {
-    @apply flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 transition-all duration-200;
+    @apply flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-purple-600 bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 transition-all duration-200 hover:shadow-md;
   }
 
   .add-btn {
-    @apply flex items-center gap-2 text-sm font-semibold text-white bg-primary border border-primary-dark rounded-xl px-5 py-2.5 transition-all duration-200 hover:bg-primary-dark cursor-pointer active:scale-95;
+    @apply flex items-center gap-2 text-sm font-bold text-white bg-[#8b5cf6] rounded-xl px-6 py-3 transition-all duration-300 hover:bg-[#7c3aed] cursor-pointer active:scale-95 hover:shadow-lg hover:shadow-purple-500/30;
   }
 
   .add-btn-fill {
-    @apply text-white bg-blue-900 hover:bg-black border-transparent;
+    @apply text-white bg-[#8b5cf6] border-transparent;
   }
+
+  .danger-btn {
+    @apply flex items-center gap-2 text-sm font-bold text-white bg-rose-600 rounded-xl px-6 py-3 transition-all duration-300 hover:bg-rose-700 cursor-pointer active:scale-95 hover:shadow-lg hover:shadow-rose-500/30;
+  }
+
+  .secondary-btn {
+    @apply flex items-center gap-2 text-sm font-bold text-slate-700 bg-gray-100 rounded-xl px-6 py-3 transition-all duration-300 hover:bg-gray-200 cursor-pointer active:scale-95 hover:shadow-md;
+  }
+
+
 
   .nav-item {
     @apply flex items-center gap-3.5 py-3 px-5 rounded-xl mb-1.5 transition-all duration-200 font-medium;
   }
 
   .nav-item-active {
-    @apply text-primary bg-primary/10;
+    @apply text-purple-600 bg-purple-50;
   }
 
   .nav-item-inactive {
-    @apply text-slate-400 hover:bg-gray-50 hover:text-primary;
+    @apply text-slate-400 hover:bg-gray-50 hover:text-purple-600;
   }
+
 
   .stats-gradient-1 { @apply bg-white border border-gray-100; }
   .stats-gradient-2 { @apply bg-white border border-gray-100; }

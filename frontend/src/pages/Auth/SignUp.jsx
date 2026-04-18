@@ -95,7 +95,7 @@ const SignUp = () => {
             onChange={({ target }) => setFullName(target.value)}
             placeholder="Enter Full Name"
             type="text"
-            className="input-box border-gray-200 focus:border-blue-600 placeholder:text-gray-300"
+            className="input-box border-gray-200 focus:border-purple-500 placeholder:text-gray-300"
             required
           />
         </div>
@@ -109,7 +109,7 @@ const SignUp = () => {
             onChange={({ target }) => setEmail(target.value)}
             placeholder="name@email.com"
             type="email"
-            className="input-box border-gray-200 focus:border-blue-600 placeholder:text-gray-300"
+            className="input-box border-gray-200 focus:border-purple-500 placeholder:text-gray-300"
             required
           />
         </div>
@@ -128,7 +128,7 @@ const SignUp = () => {
             <button
               type="button"
               onClick={togglePassword}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-purple-500 transition-colors"
             >
               {showPassword ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
             </button>
@@ -143,14 +143,14 @@ const SignUp = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-[0.98]"
+          className="w-full bg-[#8b5cf6] text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#7c3aed] transition-all active:scale-[0.98] hover:shadow-lg hover:shadow-purple-500/30"
         >
           Get Started
         </button>
 
         <p className="text-center text-slate-500 text-sm font-medium">
           Member?{" "}
-          <Link className="text-slate-900 hover:text-blue-600 font-bold underline underline-offset-4" to="/login">
+          <Link className="text-slate-900 hover:text-purple-600 font-bold underline underline-offset-4" to="/login">
             Sign In
           </Link>
         </p>

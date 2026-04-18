@@ -89,33 +89,31 @@ const Expense = () => {
 
   return (
     <DashboardLayout activeMenu="Expense">
-      <div className="space-y-10 pb-10">
+      <div className="space-y-8 pb-10">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/[0.02] p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          
-          <div className="relative z-10">
-            <h1 className="text-4xl font-black text-white tracking-tighter font-display">
-              Expense <span className="text-primary-light">Log</span>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-gray-100 text-center lg:text-left">
+          <div className="flex flex-col items-center lg:items-start">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Expense <span className="text-purple-600">Log</span>
             </h1>
-            <p className="text-slate-500 mt-2 font-medium">
+            <p className="text-slate-500 mt-1 font-medium">
               Track and optimize your capital outflow.
             </p>
           </div>
 
-          <div className="flex items-center gap-4 relative z-10">
+          <div className="flex items-center justify-center lg:justify-end gap-3 w-full lg:w-auto">
             <button 
               onClick={handleDownloadExpenseDetails}
-              className="add-btn group"
+              className="secondary-btn whitespace-nowrap"
             >
-              <LuDownload className="group-hover:-translate-y-1 transition-transform duration-300" /> 
+              <LuDownload /> 
               <span>Export Records</span>
             </button>
             <button 
               onClick={() => setOpenAddExpenseModal(true)}
-              className="add-btn add-btn-fill group"
+              className="add-btn whitespace-nowrap"
             >
-              <LuPlus className="group-hover:rotate-90 transition-transform duration-300" /> 
+              <LuPlus /> 
               <span>New Expense</span>
             </button>
           </div>

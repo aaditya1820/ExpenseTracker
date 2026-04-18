@@ -1,15 +1,15 @@
 import React from "react";
 const DeleteAlert = ({ content, onDelete }) => {
   return (
-    <div>
-      <p className="text-sm">{content}</p>
-      <div className="flex justify-end mt-6">
+    <div className="space-y-6">
+      <p className="text-slate-600 leading-relaxed">{content}</p>
+      <div className="flex justify-end pt-2">
         <button
           type="button"
-          className="add-btn add-btn-fill"
+          className="danger-btn w-full md:w-auto justify-center"
           onClick={onDelete}
         >
-          Delete
+          Delete Permanently
         </button>
       </div>
     </div>

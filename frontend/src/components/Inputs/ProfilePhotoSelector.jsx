@@ -28,26 +28,26 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
         className="hidden"
       />
       {!image ? (
-        <div className="w-20 h-20 flex items-center justify-center bg-purple-200 rounded-full relative">
-          <LuUser className="text-4xl text-purple-700" />
+        <div className="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-3xl relative border border-gray-200">
+          <LuUser className="text-4xl text-slate-400" />
           <button
             type="button"
-            className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full absolute -bottom-1 -right-1"
+            className="w-10 h-10 flex items-center justify-center bg-[#8b5cf6] text-white rounded-xl absolute -bottom-2 -right-2 hover:bg-[#7c3aed] transition-all hover:shadow-lg hover:shadow-purple-500/30 active:scale-95"
             onClick={onChooseFile}
           >
             <LuUpload />
           </button>
         </div>
       ) : (
-        <div className="w-20 h-20 flex items-center justify-center bg-purple-200 rounded-full relative">
+        <div className="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-3xl relative border border-gray-200">
           <img
             src={previewUrl}
             alt="profile photo"
-            className="w-20 h-20 rounded-full object-cover"
+            className="w-24 h-24 rounded-3xl object-cover"
           />
           <button
             type="button"
-            className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full absolute -bottom-1 -right-1"
+            className="w-10 h-10 flex items-center justify-center bg-rose-600 text-white rounded-xl absolute -bottom-2 -right-2 hover:bg-rose-700 transition-all hover:shadow-lg hover:shadow-rose-500/30 active:scale-95"
             onClick={handleRemoveImage}
           >
             <LuTrash />
