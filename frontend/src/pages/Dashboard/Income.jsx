@@ -11,7 +11,7 @@ import "jspdf-autotable";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import toast from "react-hot-toast";
-import { LuPlus, LuDownload } from "react-icons/lu";
+import { LuPlus, LuDownload, LuWallet } from "react-icons/lu";
 
 const Income = () => {
   useUserAuth();
@@ -112,29 +112,30 @@ const Income = () => {
 
   return (
     <DashboardLayout activeMenu="Income">
-      <div className="space-y-8 pb-10">
-        {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-gray-100 text-center lg:text-left">
-          <div className="flex flex-col items-center lg:items-start">
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
-              Income <span className="text-purple-600">Stream</span>
+      <div className="space-y-10 pb-10">
+        {}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-blue-50">
+          <div className="flex flex-col items-center md:items-start">
+            <h1 className="text-4xl font-bold text-blue-900 tracking-tight flex items-center gap-3">
+              <LuWallet className="text-blue-600" />
+              Income <span className="text-blue-500">Stream</span>
             </h1>
-            <p className="text-slate-500 mt-1 font-medium">
+            <p className="text-blue-400 mt-1.5 font-medium text-lg">
               Monitor and calibrate your financial inflows.
             </p>
           </div>
 
-          <div className="flex items-center justify-center lg:justify-end gap-3 w-full lg:w-auto">
+          <div className="flex items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             <button 
               onClick={handleDownloadIncomeDetails}
-              className="secondary-btn whitespace-nowrap"
+              className="secondary-btn"
             >
               <LuDownload /> 
-              <span>Export Ledger</span>
+              <span>Export</span>
             </button>
             <button 
               onClick={() => setOpenAddIncomeModal(true)}
-              className="add-btn whitespace-nowrap"
+              className="add-btn shadow-blue-500/20"
             >
               <LuPlus /> 
               <span>New Entry</span>
@@ -142,7 +143,7 @@ const Income = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-10">
           <IncomeOverview
             transactions={incomeData}
             onAddIncome={() => setOpenAddIncomeModal(true)}
@@ -180,4 +181,4 @@ const Income = () => {
 };
 
 export default Income;
-
+

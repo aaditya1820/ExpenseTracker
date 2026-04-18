@@ -1,122 +1,78 @@
 import React from "react";
 import {
-  LineChart,
+  AreaChart,
   Area,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from "recharts";
-import moment from "moment";
-const distinctColors = [
-  "#A084E8", "#9376E0", "#BA94D1", "#D1BBF2", "#9F91CC",
-  "#FF6633", "#FFB399", "#FF33FF", "#FFFF99", "#00B3E6",
-  "#E6B333", "#3366E6", "#999966", "#99FF99", "#B34D4D",
-  "#80B300", "#809900", "#E6B3B3", "#6680B3", "#66991A",
-];
-const CustomTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    const item = payload[0].payload;
-    return (
-      <div className="bg-white p-4 shadow-lg rounded-xl border border-purple-300 text-sm space-y-1 w-[220px]">
-        <div className="flex items-center justify-between">
-          <p className="font-bold text-purple-700">{item.category}</p>
-          {item.color && (
-            <div
-              className="w-4 h-4 rounded-full"
-              style={{ backgroundColor: item.color }}
-            />
-          )}
-        </div>
-        {}
-        {item.date && (
-          <p className="text-gray-500 text-xs">
-            {moment(item.date).format("Do MMM YYYY")}
-          </p>
-        )}
-        <p className="text-purple-900 font-bold text-base">
-          ₹ {Number(item.amount).toLocaleString()}
-        </p>
-        {item.type && (
-          <p className="text-xs text-gray-600 capitalize">Type: {item.type}</p>
-        )}
-      </div>
-    );
-  }
-  return null;
-};
+
 const CustomLineChart = ({ data = [] }) => {
-  const processedData = data.map((item, index) => {
-    const parsedDate = moment(item.date, [
-      "YYYY-MM-DD",
-      "DD-MM-YYYY",
-      "DD MMM YYYY",
-      "Do MMM YYYY",
-    ]);
-    return {
-      ...item,
-      category: item.category || item.source,
-      amount: Number(item.amount) || 0,
-      color: distinctColors[index % distinctColors.length],
-      date: parsedDate.isValid() ? parsedDate.toISOString() : item.date,
-    };
-  });
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const item = payload[0].payload;
+      return (
+        <div className="bg-white p-3 shadow-xl rounded-2xl border border-blue-50">
+          <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">
+            {item.month || item.category || "Detail"}
+          </p>
+          <p className="text-blue-900 font-bold text-lg">
+            ₹{payload[0].value.toLocaleString()}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="w-full h-[350px]">
+    <div className="w-full h-[400px] mt-4">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={processedData}
-          margin={{ top: 20, right: 30, left: 0, bottom: 10 }}
+        <AreaChart
+          data={data}
+          margin={{ top: 10, right: 10, left: 0, bottom: 20 }}
         >
           <defs>
-            <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#8B5CF6" stopOpacity={0.5} />
-              <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0} />
+            <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#0077b6" stopOpacity={0.1}/>
+              <stop offset="95%" stopColor="#0077b6" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="4 4" stroke="#E5E7EB" />
-          {}
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#f1f5f9"
+            vertical={false}
+          />
           <XAxis
-            dataKey="date"
-            stroke="#6B21A8"
-            tick={{ fill: "#6B21A8" }}
-            tickFormatter={(dateStr) => moment(dateStr).format("DD MMM YYYY")}
+            dataKey="month"
+            axisLine={false}
+            tickLine={false}
+            tick={{ fill: "#64748b", fontSize: 12, fontWeight: 500 }}
+            dy={10}
           />
           <YAxis
-            stroke="#6B21A8"
-            tick={{ fill: "#6B21A8" }}
-            tickFormatter={(val) =>  `₹${val}`}
+            axisLine={false}
+            tickLine={false}
+            tick={{ fill: "#64748b", fontSize: 12, fontWeight: 500 }}
+            tickFormatter={(value) => `₹${value >= 1000 ? (value/1000).toFixed(0) + 'k' : value}`}
           />
           <Tooltip content={<CustomTooltip />} />
-          <Legend verticalAlign="top" height={36} />
           <Area
             type="monotone"
             dataKey="amount"
-            stroke="#8B5CF6"
-            fill="url(#purpleGradient)"
-            strokeWidth={6}
-            legendType="none"
-            dot={{ stroke: "#8B5CF6", strokeWidth: 2, r: 4, fill: "#DDD6FE" }}
-            activeDot={{
-              r: 6,
-              stroke: "#6D28D9",
-              fill: "#8B5CF6",
-              strokeWidth: 3,
-            }}
+            stroke="#0077b6"
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorAmount)"
+            dot={{ r: 4, fill: "#0077b6", strokeWidth: 2, stroke: "#fff" }}
+            activeDot={{ r: 6, strokeWidth: 0 }}
           />
-          <Line
-            type="monotone"
-            dataKey="amount"
-            stroke="#6D28D9"
-            strokeWidth={6}
-            dot={false}
-          />
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );
 };
-export default CustomLineChart;
+
+export default CustomLineChart;

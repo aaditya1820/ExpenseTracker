@@ -1,14 +1,12 @@
 import React from "react";
-import CustomTooltip from "../Charts/CustomTooltip"
-import CustomLegend from "./CustomLegend";
 import {
   PieChart,
   Pie,
   Cell,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from "recharts";
+
 const CustomPieChart = ({
   data,
   label,
@@ -16,6 +14,20 @@ const CustomPieChart = ({
   colors,
   showTextAnchor,
 }) => {
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 shadow-xl rounded-2xl border border-blue-50">
+          <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">{payload[0].name}</p>
+          <p className="text-blue-900 font-bold text-lg">
+            ₹{payload[0].value.toLocaleString()}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <ResponsiveContainer width="100%" height={380}>
       <PieChart>
@@ -27,34 +39,36 @@ const CustomPieChart = ({
           cy="50%"
           outerRadius={140}
           innerRadius={110}
-          labelLine={false}
+          stroke="none"
+          paddingAngle={5}
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-₹${index}`} fill={colors[index % colors.length]} />
+            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
           ))}
         </Pie>
-        <Tooltip  content={CustomTooltip}/>
-        <Legend   content={CustomLegend}/>
+        <Tooltip content={<CustomTooltip />} />
         {showTextAnchor && (
           <>
             <text
               x="50%"
               y="50%"
-              dy={-25}
+              dy={-15}
               textAnchor="middle"
-              fill="#666"
-              fontSize="14px"
+              fill="#94a3b8"
+              fontSize="12px"
+              fontWeight="bold"
+              style={{ textTransform: 'uppercase', letterSpacing: '0.1em' }}
             >
               {label}
             </text>
             <text
               x="50%"
               y="50%"
-              dy={8}
+              dy={15}
               textAnchor="middle"
-              fill="#333"
+              fill="#03045e"
               fontSize="24px"
-              fontWeight="semi-bold"
+              fontWeight="800"
             >
               {totalAmount}
             </text>

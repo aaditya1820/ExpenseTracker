@@ -10,38 +10,33 @@ const DashboardLayout = ({ children, activeMenu }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col relative">
+    <div className="min-h-screen bg-[#f8fbff] flex flex-col relative">
       <Navbar 
         activeMenu={activeMenu} 
         toggleMobileMenu={toggleMobileMenu}
         isMobileMenuOpen={isMobileMenuOpen}
       />
       
-      <div className="flex flex-1 relative overflow-hidden">
-        {/* Desktop Sidebar */}
-        <aside className="hidden md:block w-72 h-[calc(100vh-80px)] sticky top-20">
-          <SideMenu activeMenu={activeMenu} />
-        </aside>
-
-        {/* Mobile Sidebar Overlay */}
+      <div className="flex-1 relative">
+        {}
         {isMobileMenuOpen && (
           <div 
-            className="fixed inset-0 z-40 bg-white/80 md:hidden transition-all duration-300"
+            className="fixed inset-0 z-[90] bg-blue-900/20 backdrop-blur-sm lg:hidden transition-all duration-300"
             onClick={toggleMobileMenu}
           />
         )}
 
-        {/* Mobile Sidebar */}
+        {}
         <aside className={`
-          fixed top-20 left-0 z-50 w-72 h-[calc(100vh-80px)] bg-white transform transition-transform duration-300 ease-in-out md:hidden border-r border-gray-100
+          fixed top-0 left-0 z-[101] w-72 h-full bg-white transform transition-transform duration-300 ease-in-out lg:hidden border-r border-blue-100 shadow-2xl
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
-          <SideMenu activeMenu={activeMenu} />
+          <SideMenu activeMenu={activeMenu} closeMobileMenu={() => setIsMobileMenuOpen(false)} />
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 overflow-y-auto h-[calc(100vh-80px)] p-6 md:p-10">
-          <div className="max-w-6xl mx-auto">
+        {}
+        <main className="py-8 md:py-12">
+          <div className="center-layout">
             {children}
           </div>
         </main>
@@ -50,9 +45,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
   );
 };
 
-
-
 export default DashboardLayout;
 
 
-
+

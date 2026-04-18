@@ -25,4 +25,8 @@ export const API_PATHS = {
   IMAGE: {
     UPLOAD_IMAGE: "/api/v1/auth/upload-image",
   },
-};
+  GOAL: {
+    SET_GOAL: "/api/v1/goal/set",
+    GET_GOAL: "/api/v1/goal/get",
+  },
+};

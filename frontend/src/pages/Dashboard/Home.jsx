@@ -5,7 +5,7 @@ import { useUserAuth } from "../../hooks/useUserAuth";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import InfoCard from "../../components/Cards/InfoCard";
-import { LuSprout, LuArrowUpRight, LuArrowDownRight, LuPlus } from "react-icons/lu";
+import { LuArrowUpRight, LuArrowDownRight, LuPlus, LuLayoutDashboard } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import { addThousandsSeparator } from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
@@ -40,56 +40,60 @@ const Home = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="space-y-8">
-        {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-gray-100 text-center lg:text-left">
-          <div className="flex flex-col items-center lg:items-start">
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+      <div className="space-y-10">
+        {}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-blue-50">
+          <div className="flex flex-col items-center md:items-start">
+            <h1 className="text-4xl font-bold text-blue-900 tracking-tight flex items-center gap-3">
               Hello, {user?.fullName?.split(' ')[0] || 'User'}
+              <span className="hidden sm:inline">👋</span>
             </h1>
-            <p className="text-slate-500 mt-1 font-medium">
-              Your CashSprout overview is ready.
+            <p className="text-blue-400 mt-1.5 font-medium text-lg">
+              Your financial health at a glance.
             </p>
           </div>
 
-          <div className="flex items-center justify-center lg:justify-end gap-3 w-full lg:w-auto">
+          <div className="flex items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             <button 
               onClick={() => navigate("/income")}
-              className="add-btn whitespace-nowrap"
+              className="add-btn !bg-blue-50 !text-blue-600 hover:!bg-blue-100 shadow-none border border-blue-100"
             >
               <LuPlus /> 
-              <span>Add Income</span>
+              <span>Income</span>
             </button>
             <button 
               onClick={() => navigate("/expense")}
-              className="add-btn whitespace-nowrap"
+              className="add-btn shadow-blue-500/20"
             >
               <LuPlus /> 
-              <span>Add Expense</span>
+              <span>Expense</span>
             </button>
           </div>
         </div>
 
-        {/* Stats Grid */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
             icon={<IoMdCard />}
             label="Total Balance"
             value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
+            type="balance"
           />
           <InfoCard
             icon={<LuArrowUpRight />}
             label="Total Income"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
+            type="income"
           />
           <InfoCard
             icon={<LuArrowDownRight />}
             label="Total Expense"
             value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
+            type="expense"
           />
         </div>
 
-        {/* Analytics Grid */}
+        {}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           <FinanceOverview
             totalBalance={dashboardData?.totalBalance || 0}
@@ -114,7 +118,7 @@ const Home = () => {
           />
         </div>
 
-        {/* Lists Grid */}
+        {}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 pb-10">
           <ExpenseTransactions
             transactions={dashboardData?.last30DaysExpenses?.transactions || []}
@@ -130,10 +134,7 @@ const Home = () => {
   );
 };
 
-
-
-
 export default Home;
 
 
-
+

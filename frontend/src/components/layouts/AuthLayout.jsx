@@ -4,7 +4,7 @@ import { LuSprout } from "react-icons/lu";
 const AuthLayout = ({ children }) => {
   return (
     <div className='flex min-h-screen bg-white font-sans text-slate-900 overflow-hidden'>
-      {/* Left Side: Form */}
+      {}
       <div className='w-full lg:w-[45%] flex flex-col px-8 md:px-20 py-12 bg-white border-r border-gray-100'>
         <div className="flex items-center gap-3 mb-16">
           <div className="bg-blue-600 p-2.5 rounded-xl">
@@ -26,7 +26,7 @@ const AuthLayout = ({ children }) => {
         </div>
       </div>
 
-      {/* Right Side: Minimal & Proper */}
+      {}
       <div className='hidden lg:flex lg:w-[55%] bg-gray-50 items-center justify-center p-20'>
         <div className='max-w-md'>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-600 text-[10px] font-bold uppercase tracking-widest mb-6">
@@ -62,4 +62,4 @@ const AuthLayout = ({ children }) => {
 export default AuthLayout
 
 
-
+

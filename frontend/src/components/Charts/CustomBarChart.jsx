@@ -9,28 +9,18 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+
 const distinctColors = [
-  "#A084E8",
-  "#9376E0",
-  "#BA94D1",
-  "#D1BBF2",
-  "#9F91CC",
-  "#FF6633",
-  "#FFB399",
-  "#FF33FF",
-  "#FFFF99",
-  "#00B3E6",
-  "#E6B333",
-  "#3366E6",
-  "#999966",
-  "#99FF99",
-  "#B34D4D",
-  "#80B300",
-  "#809900",
-  "#E6B3B3",
-  "#6680B3",
-  "#66991A",
+  "#0077b6",
+  "#0096c7",
+  "#00b4d8",
+  "#48cae4",
+  "#90e0ef",
+  "#ade8f4",
+  "#023e8a",
+  "#03045e",
 ];
+
 const IncomeBarChart = ({ data = [] }) => {
   const processedData = data.map((item, index) => ({
     ...item,
@@ -38,13 +28,14 @@ const IncomeBarChart = ({ data = [] }) => {
     amount: Number(item.amount) || 0,
     color: distinctColors[index % distinctColors.length],
   }));
+
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const item = payload[0].payload;
       return (
-        <div className="bg-white p-3 shadow-lg rounded-lg border border-gray-200 text-xl">
-          <p className="font-bold text-gray-800">{item.category}</p>
-          <p className="text-green-600 font-bold text-base">
+        <div className="bg-white p-3 shadow-xl rounded-2xl border border-blue-50">
+          <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">{item.category}</p>
+          <p className="text-blue-900 font-bold text-lg">
             ₹{item.amount.toLocaleString()}
           </p>
         </div>
@@ -52,43 +43,46 @@ const IncomeBarChart = ({ data = [] }) => {
     }
     return null;
   };
+
   if (!processedData.length) {
     return (
-      <div className="bg-white w-full h-[300px] flex flex-col items-center justify-center rounded-lg p-4">
-        <p className="text-gray-500 mb-2">No income data available</p>
-        <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl transition">
-          + Add Income
-        </button>
+      <div className="w-full h-[300px] flex flex-col items-center justify-center">
+        <p className="text-slate-400 font-medium">No income data available</p>
       </div>
     );
   }
+
   return (
-    <div className="bg-white w-full h-[400px] p-4 rounded-lg shadow-sm">
+    <div className="w-full h-[400px] mt-4">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={processedData}
-          margin={{ top: 20, right: 20, left: 20, bottom: 40 }}
-          barSize={200}
+          margin={{ top: 10, right: 10, left: 0, bottom: 20 }}
         >
           <CartesianGrid
             strokeDasharray="3 3"
-            stroke="#f0f0f0"
+            stroke="#f1f5f9"
             vertical={false}
           />
           <XAxis
             dataKey="category"
+            axisLine={false}
             tickLine={false}
-            tick={{ fill: "#555", fontSize: 14 }}
-            interval={0}
+            tick={{ fill: "#64748b", fontSize: 12, fontWeight: 500 }}
+            dy={10}
           />
           <YAxis
             axisLine={false}
             tickLine={false}
-            tick={{ fill: "#555", fontSize: 14 }}
-            tickFormatter={(value) => `₹${value.toLocaleString()}`}
+            tick={{ fill: "#64748b", fontSize: 12, fontWeight: 500 }}
+            tickFormatter={(value) => `₹${value >= 1000 ? (value/1000).toFixed(0) + 'k' : value}`}
           />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="amount" name="Amount" radius={[6, 6, 0, 0]}>
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: '#f8fafc' }} />
+          <Bar 
+            dataKey="amount" 
+            radius={[8, 8, 0, 0]}
+            barSize={40}
+          >
             {processedData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
@@ -98,4 +92,5 @@ const IncomeBarChart = ({ data = [] }) => {
     </div>
   );
 };
+
 export default IncomeBarChart;
