@@ -1,6 +1,6 @@
-import UserGoal from "../models/userGoal.js";
+const UserGoal = require("../models/userGoal.js");
 
-export const setGoal = async (req, res) => {
+const setGoal = async (req, res) => {
   const { incomeGoal, expenseLimit, month, year } = req.body;
   const userId = req.user.id;
 
@@ -32,7 +32,7 @@ export const setGoal = async (req, res) => {
 };
 
 
-export const getGoal = async (req, res) => {
+const getGoal = async (req, res) => {
   const userId = req.user.id;
   const { month, year } = req.query;
 
@@ -47,3 +47,5 @@ export const getGoal = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+module.exports = { setGoal, getGoal };
