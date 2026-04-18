@@ -25,9 +25,9 @@
   --color-bg: #f8fbff;
   --color-card: #ffffff;
   --color-border: #e2e8f0;
-  --color-text-main: #0f172a;
+  --color-text-main: #023e8a;
   --color-text-muted: #64748b;
-  --color-text-dark: #03045e;
+  --color-text-dark: #023e8a;
 }
 
 @layer base {

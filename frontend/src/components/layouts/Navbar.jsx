@@ -48,8 +48,7 @@ const Navbar = ({ activeMenu, toggleMobileMenu, isMobileMenuOpen }) => {
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-3 pr-4 border-r border-blue-50">
             <div className="text-right">
-              <p className="text-xs font-bold text-blue-900 leading-none">{user?.fullName || "User"}</p>
-              <p className="text-[10px] text-blue-400 font-medium mt-1 uppercase tracking-wider">Premium Account</p>
+              <p className="text-sm font-bold text-[#023e8a] leading-none">{user?.fullName || "User"}</p>
             </div>
           </div>
 

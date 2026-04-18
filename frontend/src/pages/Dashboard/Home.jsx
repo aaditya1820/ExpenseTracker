@@ -44,7 +44,7 @@ const Home = () => {
         {}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-blue-50">
           <div className="flex flex-col items-center md:items-start">
-            <h1 className="text-4xl font-bold text-blue-900 tracking-tight flex items-center gap-3">
+            <h1 className="text-5xl font-bold text-[#023e8a] tracking-tight flex items-center gap-3">
               Hello, {user?.fullName?.split(' ')[0] || 'User'}
               <span className="hidden sm:inline">👋</span>
             </h1>

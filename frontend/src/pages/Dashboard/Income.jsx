@@ -11,7 +11,7 @@ import "jspdf-autotable";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import toast from "react-hot-toast";
-import { LuPlus, LuDownload, LuWallet } from "react-icons/lu";
+import { LuPlus, LuDownload, LuWallet, LuTarget } from "react-icons/lu";
 
 const Income = () => {
   useUserAuth();
