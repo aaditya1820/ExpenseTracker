@@ -21,9 +21,9 @@ pnpm-debug.log*
 .idea/
 .DS_Store
 
-# SQLite
-*.db
-*.db-journal
+# # SQLite
+# *.db
+# *.db-journal
 
 # Uploads
 backend/uploads/*

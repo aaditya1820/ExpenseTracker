@@ -26,7 +26,7 @@ A comprehensive, full-stack personal finance management application designed to 
 ### Backend
 - **Node.js & Express**: A robust and scalable server-side environment.
 - **Prisma**: Type-safe ORM for database management.
-- **PostgreSQL**: A powerful, persistent relational database (Render Managed).
+- **SQLite**: A lightweight, file-based database.
 - **JWT (JSON Web Tokens)**: For secure user session management.
 - **Multer**: For handling file uploads (profile pictures).
 - **ExcelJS & JSPDF**: For generating data exports.
@@ -66,13 +66,13 @@ ExpenseTracker/
 3. Create a `.env` file and configure your environment variables:
    ```env
    PORT=5000
-   DATABASE_URL="postgresql://user:password@localhost:5432/expensetracker"
+   DATABASE_URL="file:./dev.db"
    JWT_SECRET=your_secret_key
    CLIENT_URL=http://localhost:5173
    ```
 4. Initialize the database:
    ```bash
-   npx prisma migrate dev --name init
+   npx prisma db push
    ```
 5. Start the development server:
    ```bash
