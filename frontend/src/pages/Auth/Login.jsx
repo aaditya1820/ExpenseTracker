@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance"; 
 import { API_PATHS } from "../../utils/apiPaths";
-import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
+
 const validateEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 };
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const {updateUser} = useContext(UserContext)
-  const togglePassword = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
+
+  const togglePassword = () => setShowPassword(!showPassword);
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Email:", email, "Password:", password);
     if (!validateEmail(email)) {
       setError("Please enter a valid email address!");
       return;
@@ -30,6 +32,7 @@ const Login = () => {
       return;
     }
     setError("");
+
     try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
@@ -49,62 +52,75 @@ const Login = () => {
       }
     }
   };
+
   return (
     <AuthLayout>
-      <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-2xl font-semibold text-black">Welcome Back !!</h3>
-        <p className="text-xl text-slate-700 mt-[5px] mb-6">
-          Please Enter Your Details To LogIn !!
-        </p>
-        <form onSubmit={handleLogin} className="space-y-5">
-          <div>
-            <label className="block text-sm text-gray-700 mb-1">
-              Email Address
-            </label>
-            <input
-              value={email}
-              onChange={({ target }) => setEmail(target.value)}
-              placeholder="example@gmail.com"
-              autoComplete="off"
-              type="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-600"
-              required
-            />
-          </div>
+      <div className="space-y-2 mb-8">
+        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome Back</h2>
+        <p className="text-slate-500 font-medium">Please enter your details to sign in to your account.</p>
+      </div>
+
+      <form onSubmit={handleLogin} className="space-y-6">
+        <div>
+          <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">
+            Email Address
+          </label>
+          <input
+            value={email}
+            onChange={({ target }) => setEmail(target.value)}
+            placeholder="name@example.com"
+            autoComplete="off"
+            type="email"
+            className="input-box m-0"
+            required
+          />
+        </div>
+
+        <div className="relative">
+          <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Password</label>
           <div className="relative">
-            <label className="block text-sm text-gray-700 mb-1">Password</label>
             <input
               value={password}
               onChange={({ target }) => setPassword(target.value)}
-              placeholder="Enter your password"
-              autoComplete="new-password"
+              placeholder="••••••••"
+              autoComplete="current-password"
               type={showPassword ? "text" : "password"}
-              className="w-full px-4 py-2 border border-gray-300 rounded pr-10 focus:outline-none focus:ring-2 focus:ring-purple-600"
+              className="input-box m-0 pr-12"
               required
             />
-            <div
+            <button
+              type="button"
               onClick={togglePassword}
-              className="absolute right-3 top-[38px] cursor-pointer text-gray-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors cursor-pointer"
             >
-              {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-            </div>
+              {showPassword ? <FaRegEyeSlash size={20} /> : <FaRegEye size={20} />}
+            </button>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-purple-700 text-white py-2 hover:bg-fuchsia-700 rounded-xl transition"
-          >
-            Log In
-          </button>
-          <p className="text-[13px] text-slate-800 mt-3">
-            Don't have an account?{" "}
-            <Link className="font-medium text-primary underline" to="/signup">
-              Sign Up
-            </Link>
-          </p>
-          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-        </form>
-      </div>
+        </div>
+
+        {error && (
+          <div className="bg-rose-50 border border-rose-100 text-rose-600 px-4 py-3 rounded-xl text-sm font-medium animate-shake">
+            {error}
+          </div>
+        )}
+
+        <button
+          type="submit"
+          className="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary-dark transition-all active:scale-[0.98] cursor-pointer"
+        >
+          Sign In
+        </button>
+
+        <p className="text-center text-slate-600 font-medium">
+          Don't have an account?{" "}
+          <Link className="text-primary hover:text-primary-dark font-bold underline underline-offset-4" to="/signup">
+            Create one
+          </Link>
+        </p>
+      </form>
     </AuthLayout>
   );
 };
-export default Login;
+
+export default Login;
+

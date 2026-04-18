@@ -11,12 +11,15 @@ import "jspdf-autotable";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import { toast } from "react-toastify"; 
+import { LuPlus, LuDownload } from "react-icons/lu";
+
 const Expense = () => {
   useUserAuth();
   const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({ show: false, data: null });
+
   const fetchExpenseDetails = async () => {
     if (loading) return;
     setLoading(true);
@@ -31,6 +34,7 @@ const Expense = () => {
       setLoading(false);
     }
   };
+
   const handleAddExpense = async (expense) => {
     try {
       const response = await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, expense);
@@ -42,6 +46,7 @@ const Expense = () => {
       console.error("Error adding expense:", error);
     }
   };
+
   const deleteExpense = async (id) => {
     try {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
@@ -55,6 +60,7 @@ const Expense = () => {
       );
     }
   };
+
   const handleDownloadExpenseDetails = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
@@ -76,13 +82,39 @@ const Expense = () => {
     });
     doc.save("expense-details.pdf");
   };
+
   useEffect(() => {
     fetchExpenseDetails();
   }, []);
+
   return (
     <DashboardLayout activeMenu="Expense">
-      <div className="my-5 mx-auto">
-        <div className="grid grid-cols-1 gap-6">
+      <div className="space-y-8">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900">Expense Tracking</h1>
+            <p className="text-slate-500 mt-1 font-medium">
+              Monitor and manage your spending.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={handleDownloadExpenseDetails}
+              className="add-btn"
+            >
+              <LuDownload /> Download PDF
+            </button>
+            <button 
+              onClick={() => setOpenAddExpenseModal(true)}
+              className="add-btn add-btn-fill"
+            >
+              <LuPlus /> Add Expense
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8">
           <ExpenseOverview
             transactions={expenseData}
             onAddExpense={() => setOpenAddExpenseModal(true)}
@@ -93,6 +125,7 @@ const Expense = () => {
             onDownload={handleDownloadExpenseDetails}
           />
         </div>
+
         <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
@@ -100,6 +133,7 @@ const Expense = () => {
         >
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </Modal>
+
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
@@ -114,4 +148,6 @@ const Expense = () => {
     </DashboardLayout>
   );
 };
-export default Expense;
+
+export default Expense;
+

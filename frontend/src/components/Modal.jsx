@@ -1,35 +1,28 @@
 import React from "react";
+import { HiOutlineX } from "react-icons/hi";
+
 const Modal = ({ children, isOpen, onClose, title }) => {
   if (!isOpen) return null;
+
   return (
-<div className="fixed inset-0 z-[999] flex justify-center items-center bg-black/30 backdrop-blur-sm min-h-screen">
-      <div className="bg-gray-100 rounded-xl shadow-lg w-full max-w-2xl mx-4">
-        <div className="flex items-center justify-between p-4 border-b">
-          <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+    <div className="fixed inset-0 z-[999] flex justify-center items-center bg-slate-900/40 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+        <div className="flex items-center justify-between px-8 py-6 border-b border-slate-100">
+          <h3 className="text-xl font-bold text-slate-900 font-display">{title}</h3>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 focus:outline-none"
+            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
           >
-            <svg
-              className="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1l12 12M13 1L1 13"
-              />
-            </svg>
+            <HiOutlineX size={20} />
           </button>
         </div>
-        <div className="p-4">{children}</div>
+        <div className="p-8 max-h-[85vh] overflow-y-auto">
+          {children}
+        </div>
       </div>
     </div>
   );
 };
-export default Modal;
+
+export default Modal;
+

@@ -11,6 +11,8 @@ import "jspdf-autotable";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import toast from "react-hot-toast";
+import { LuPlus, LuDownload } from "react-icons/lu";
+
 const Income = () => {
   useUserAuth();
   const [incomeData, setIncomeData] = useState([]);
@@ -20,6 +22,7 @@ const Income = () => {
     show: false,
     data: null,
   });
+
   const fetchIncomeDetails = async () => {
     if (loading) return;
     setLoading(true);
@@ -34,13 +37,15 @@ const Income = () => {
       setLoading(false);
     }
   };
+
   const handleAddIncome = async (income) => {
     const { source, amount, date, icon } = income;
     if (!source.trim()) {
       toast.error("Source is required");
+      return;
     }
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("Amount should be a valid number grater than zero!");
+      toast.error("Amount should be a valid number greater than zero!");
       return;
     }
     if (!date) {
@@ -64,6 +69,7 @@ const Income = () => {
       );
     }
   };
+
   const deleteIncome = async (id) => {
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
@@ -77,6 +83,7 @@ const Income = () => {
       );
     }
   };
+
   const handleDownloadIncomeDetails = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
@@ -98,13 +105,39 @@ const Income = () => {
     });
     doc.save("income-details.pdf");
   };
+
   useEffect(() => {
     fetchIncomeDetails();
   }, []);
+
   return (
     <DashboardLayout activeMenu="Income">
-      <div className="my-5 mx-auto">
-        <div className="grid grid-cols-1 gap-6">
+      <div className="space-y-8">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900">Income Tracking</h1>
+            <p className="text-slate-500 mt-1 font-medium">
+              Monitor and manage your earnings.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={handleDownloadIncomeDetails}
+              className="add-btn"
+            >
+              <LuDownload /> Download PDF
+            </button>
+            <button 
+              onClick={() => setOpenAddIncomeModal(true)}
+              className="add-btn add-btn-fill"
+            >
+              <LuPlus /> Add Income
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8">
           <IncomeOverview
             transactions={incomeData}
             onAddIncome={() => setOpenAddIncomeModal(true)}
@@ -117,6 +150,7 @@ const Income = () => {
             onDownload={handleDownloadIncomeDetails}
           />
         </div>
+
         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
@@ -124,6 +158,7 @@ const Income = () => {
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
         </Modal>
+
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
@@ -138,4 +173,6 @@ const Income = () => {
     </DashboardLayout>
   );
 };
-export default Income;
+
+export default Income;
+

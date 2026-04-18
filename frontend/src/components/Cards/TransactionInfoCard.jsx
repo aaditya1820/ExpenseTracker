@@ -5,6 +5,7 @@ import {
   LuTrendingDown,
   LuTrash2,
 } from "react-icons/lu";
+
 const TransactionInfoCard = ({
   title,
   icon,
@@ -15,46 +16,45 @@ const TransactionInfoCard = ({
   onDelete,
 }) => {
   const getAmountStyles = () =>
-    type === "income" ? "bg-green-50 text-green-500" : "bg-red-50 text-red-500";
+    type === "income" 
+      ? "text-emerald-600 bg-emerald-50 border-emerald-100" 
+      : "text-rose-600 bg-rose-50 border-rose-100";
+
   return (
-    <div className="group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60">
-      {}
-      <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full">
+    <div className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-all duration-200 border border-transparent hover:border-slate-100">
+      <div className="w-12 h-12 flex items-center justify-center text-xl text-slate-700 bg-slate-100 rounded-xl group-hover:bg-white group-hover:shadow-sm transition-all">
         {icon ? (
-          <img src={icon} alt={title} className="w-6 h-6" />
+          <img src={icon} alt={title} className="w-6 h-6 object-contain" />
         ) : (
           <LuUtensils />
         )}
       </div>
-      {}
-      <div className="flex-1 flex items-center justify-between">
-        <div>
-          <p className="text-sm text-gray-800 font-medium">{title}</p>
-          <p className="text-sm text-gray-400 mt-1">{date}</p>
+
+      <div className="flex-1 flex items-center justify-between min-w-0">
+        <div className="truncate mr-4">
+          <p className="text-sm font-bold text-slate-800 truncate">{title}</p>
+          <p className="text-xs font-medium text-slate-400 mt-0.5">{date}</p>
         </div>
-      </div>
-      {}
-      <div className="flex items-center gap-2">
-        {}
-        {!hideDeleteBtn && (
-          <button
-            className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-            onClick={onDelete}
-          >
-            <LuTrash2 size={18} />
-          </button>
-        )}
-        {}
-        <div
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}
-        >
-          <h6 className="text-xs font-medium">
-            {type === "income" ? "+" : "-"}₹{amount}
-          </h6>
-          {type === "income" ? <LuTrendingUp /> : <LuTrendingDown />}
+
+        <div className="flex items-center gap-3 shrink-0">
+          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border font-bold text-sm ${getAmountStyles()}`}>
+            <span>{type === "income" ? "+" : "-"}₹{amount}</span>
+            {type === "income" ? <LuTrendingUp size={14} /> : <LuTrendingDown size={14} />}
+          </div>
+
+          {!hideDeleteBtn && (
+            <button
+              className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+              onClick={onDelete}
+            >
+              <LuTrash2 size={18} />
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
 };
-export default TransactionInfoCard;
+
+export default TransactionInfoCard;
+
