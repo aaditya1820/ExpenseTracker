@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LuPlus, LuTarget, LuAlertTriangle } from "react-icons/lu";
+import { LuPlus, LuTarget, LuTriangleAlert } from "react-icons/lu";
 import CustomLineChart from "../../components/Charts/CustomLineChart";
 import { prepareExpenseLineChartData } from "../../utils/helper";
 import ExpenseLimitModal from "../Expense/AddExpenseLimit";
@@ -103,7 +103,7 @@ const ExpenseOverview = ({ transactions, onAddExpense, onExpenseLimit, operation
           <div className="mb-8 flex items-center justify-between p-4 bg-rose-50 rounded-2xl border border-rose-100">
              <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center text-white shadow-lg shadow-rose-500/20">
-                   <LuAlertTriangle size={20} />
+                   <LuTriangleAlert size={20} />
                 </div>
                 <div>
                    <p className="text-[10px] font-bold text-rose-400 uppercase tracking-widest">Monthly Limit</p>

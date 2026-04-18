@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LuPlus, LuTarget, LuCheckCircle } from "react-icons/lu";
+import { LuPlus, LuTarget, LuCircleCheck } from "react-icons/lu";
 import CustomBarChart from "../../components/Charts/CustomBarChart";
 import { prepareIncomeBarChartData } from "../../utils/helper";
 import AddGoalForm from "../Income/AddGoalForm";
@@ -102,7 +102,7 @@ const IncomeOverview = ({ transactions, onAddIncome, operationMessage }) => {
           <div className="mb-8 flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-100">
              <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-                   <LuCheckCircle size={20} />
+                   <LuCircleCheck size={20} />
                 </div>
                 <div>
                    <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Monthly Goal</p>
