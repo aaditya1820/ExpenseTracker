@@ -1,8 +1,8 @@
-const xlsx = require('xlsx')
-const Expense = require("../models/Expense");
+const prisma = require("../config/prisma");
+const xlsx = require('xlsx');
 
 exports.addExpense = async (req, res) => {
-    const userId = req.user.id;
+    const userId = parseInt(req.user.id);
 
     try {
         const { icon, category, amount, date } = req.body;
@@ -11,53 +11,65 @@ exports.addExpense = async (req, res) => {
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        const newExpense = new Expense({
-            userId,
-            icon,
-            category,
-            amount,
-            date: new Date(date),
+        const newExpense = await prisma.expense.create({
+            data: {
+                userId,
+                icon,
+                category,
+                amount: parseFloat(amount),
+                date: new Date(date),
+            },
         });
 
-        await newExpense.save();
         res.status(200).json(newExpense);
     } catch (error) {
+        console.error("Add Expense Error:", error);
         res.status(500).json({ message: "Server Error" });
     }
 };
 
 exports.getAllExpense = async (req, res) => {
-    const userId = req.user.id;
+    const userId = parseInt(req.user.id);
 
     try {
-        const expense = await Expense.find({ userId }).sort({ date: -1 });
+        const expense = await prisma.expense.findMany({
+            where: { userId },
+            orderBy: { date: 'desc' },
+        });
         res.json(expense);
     } catch (err) {
+        console.error("Get All Expense Error:", err);
         res.status(500).json({ message: "Server Error" });
     }
 };
 
 exports.deleteExpense = async (req, res) => {
-    const userId = req.user.id;
-    const expenseId = req.params.id;
+    const userId = parseInt(req.user.id);
+    const expenseId = parseInt(req.params.id);
 
     try {
-        const expense = await Expense.findOneAndDelete({ _id: expenseId, userId });
+        const expense = await prisma.expense.deleteMany({
+            where: { id: expenseId, userId },
+        });
 
-        if (!expense) {
+        if (expense.count === 0) {
             return res.status(404).json({ message: "Expense not found or unauthorized" });
         }
 
         res.status(200).json({ message: "Expense deleted successfully" });
     } catch (error) {
+        console.error("Delete Expense Error:", error);
         res.status(500).json({ message: "Server Error" });
     }
 };
 
 exports.downloadExpenseExcel = async (req, res) => {
-    const userId = req.user.id;
+    const userId = parseInt(req.user.id);
     try {
-        const expense = await Expense.find({ userId }).sort({ date: -1 });
+        const expense = await prisma.expense.findMany({
+            where: { userId },
+            orderBy: { date: 'desc' },
+        });
 
         const data = expense.map((item) => ({
             category: item.category,
@@ -71,6 +83,7 @@ exports.downloadExpenseExcel = async (req, res) => {
         xlsx.writeFile(wb, 'expense_details.xlsx');
         res.download('expense_details.xlsx');
     } catch (error) {
+        console.error("Download Expense Excel Error:", error);
         res.status(500).json({ message: "Server Error" });
     }
 };

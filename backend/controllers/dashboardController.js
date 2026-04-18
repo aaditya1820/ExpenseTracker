@@ -1,39 +1,33 @@
-const Income = require("../models/Income");
-const Expense = require("../models/Expense");
-const { isValidObjectId, Types } = require("mongoose");
+const prisma = require("../config/prisma");
 
 // Dashboard Data
 exports.getDashboardData = async (req, res) => {
     try {
-        const userId = req.user.id;
-
-        // Ensure userId is a valid ObjectId
-        if (!isValidObjectId(userId)) {
-            return res.status(400).json({ message: "Invalid user ID" });
-        }
-
-        const userObjectId = new Types.ObjectId(String(userId));
+        const userId = parseInt(req.user.id);
 
         // Fetch total income
-        const totalIncome = await Income.aggregate([
-            { $match: { userId: userObjectId } },
-            { $group: { _id: null, total: { $sum: "$amount" } } },
-        ]);
-
-        // Console log for debugging
-        console.log("totalIncome", { totalIncome, userId: isValidObjectId(userId) });
+        const incomeStats = await prisma.income.aggregate({
+            where: { userId },
+            _sum: { amount: true },
+        });
+        const totalIncomeValue = incomeStats._sum.amount || 0;
 
         // Fetch total expense
-        const totalExpense = await Expense.aggregate([
-            { $match: { userId: userObjectId } },
-            { $group: { _id: null, total: { $sum: "$amount" } } },
-        ]);
+        const expenseStats = await prisma.expense.aggregate({
+            where: { userId },
+            _sum: { amount: true },
+        });
+        const totalExpenseValue = expenseStats._sum.amount || 0;
 
         // Get income transactions in the last 60 days
-        const last60DaysIncomeTransactions = await Income.find({
-            userId,
-            date: { $gte: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000) },
-        }).sort({ date: -1 });
+        const sixtyDaysAgo = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000);
+        const last60DaysIncomeTransactions = await prisma.income.findMany({
+            where: {
+                userId,
+                date: { gte: sixtyDaysAgo },
+            },
+            orderBy: { date: 'desc' },
+        });
 
         // Calculate total income for last 60 days
         const incomeLast60Days = last60DaysIncomeTransactions.reduce(
@@ -42,10 +36,14 @@ exports.getDashboardData = async (req, res) => {
         );
 
         // Get expense transactions in the last 30 days
-        const last30DaysExpenseTransactions = await Expense.find({
-            userId,
-            date: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) },
-        }).sort({ date: -1 });
+        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const last30DaysExpenseTransactions = await prisma.expense.findMany({
+            where: {
+                userId,
+                date: { gte: thirtyDaysAgo },
+            },
+            orderBy: { date: 'desc' },
+        });
 
         // Calculate total expenses for last 30 days
         const expensesLast30Days = last30DaysExpenseTransactions.reduce(
@@ -54,32 +52,36 @@ exports.getDashboardData = async (req, res) => {
         );
 
         // Fetch last 5 income transactions
-        const incomeTxns = await Income.find({ userId })
-            .sort({ date: -1 })
-            .limit(5);
+        const incomeTxns = await prisma.income.findMany({
+            where: { userId },
+            orderBy: { date: 'desc' },
+            take: 5,
+        });
 
         // Fetch last 5 expense transactions
-        const expenseTxns = await Expense.find({ userId })
-            .sort({ date: -1 })
-            .limit(5);
+        const expenseTxns = await prisma.expense.findMany({
+            where: { userId },
+            orderBy: { date: 'desc' },
+            take: 5,
+        });
 
         // Merge and sort last 5 income + expense transactions
         const lastTransactions = [
             ...incomeTxns.map((txn) => ({
-                ...txn.toObject(),
+                ...txn,
                 type: "income"
             })),
             ...expenseTxns.map((txn) => ({
-                ...txn.toObject(),
+                ...txn,
                 type: "expense"
             }))
-        ].sort((a, b) => new Date(b.date) - new Date(a.date));
+        ].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
         // Send final response
         res.json({
-            totalBalance: (totalIncome[0]?.total || 0) - (totalExpense[0]?.total || 0),
-            totalIncome: totalIncome[0]?.total || 0,
-            totalExpenses: totalExpense[0]?.total || 0,
+            totalBalance: totalIncomeValue - totalExpenseValue,
+            totalIncome: totalIncomeValue,
+            totalExpenses: totalExpenseValue,
             last30DaysExpenses: {
                 total: expensesLast30Days,
                 transactions: last30DaysExpenseTransactions,
@@ -91,6 +93,7 @@ exports.getDashboardData = async (req, res) => {
             recentTransactions: lastTransactions,
         });
     } catch (error) {
-        res.status(500).json({ message: "Server Error!!", error });
+        console.error("Dashboard Data Error:", error);
+        res.status(500).json({ message: "Server Error!!", error: error.message });
     }
 };
