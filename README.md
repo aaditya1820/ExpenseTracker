@@ -92,10 +92,3 @@ ExpenseTracker/
    ```bash
    npm run dev
    ```
-
-## 📄 License
-
-This project is open-source and available under the [ISC License](LICENSE).
-
----
-Developed with ❤️ by [Aaditya](https://github.com/aaditya1820)
